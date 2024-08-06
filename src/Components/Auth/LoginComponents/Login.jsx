@@ -19,7 +19,7 @@ export default function Component() {
     <div className="flex flex-col items-center justify-center p-6 bg-white shadow-md rounded-lg">
       <div className="flex flex-col items-center space-y-4">
         {/* <MapIcon className="w-12 h-12 text-blue-600" /> */}
-        <h1 className="text-2xl font-bold">Welcome to Xpand</h1>
+        <h1 className="text-2xl font-bold">Welcome to Mapospace</h1>
         <p className="text-muted-foreground">
           Unlock the power of location data for your business
         </p>
