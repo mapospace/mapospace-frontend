@@ -32,7 +32,7 @@ export default function Component() {
             <input
               type="email"
               id="email"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -49,7 +49,7 @@ export default function Component() {
               <input
                 type={showPassword ? 'text' : 'password'}
                 id="password"
-                className="block w-full px-3 py-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pr-10 rounded"
+                className="block w-full px-3 py-2 border border-gray-300 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pr-10 rounded"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
