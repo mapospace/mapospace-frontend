@@ -17,8 +17,7 @@ module.exports = {
         'large': '12px',
       },
       fontFamily: {
-        heading: ['var(--font-heading)', ...fontFamily.sans],
-        body: ['var(--font-body)', ...fontFamily.sans]
+        poppins: ['Poppins', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',
