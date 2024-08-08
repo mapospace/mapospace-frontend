@@ -15,7 +15,7 @@ export default function Component() {
     setIsChecked(event.target.checked);
   }
   return (
-    <div className="flex items-center justify-center mt-5 ">
+    <div className="flex items-center justify-center mt-3 font-poppins ">
       <div className="flex flex-col items-center justify-center p-6 bg-white shadow-md rounded-lg">
         <div className="flex flex-col items-center space-y-4">
           {/* <MapIcon className="w-12 h-12 text-blue-600" /> */}
@@ -32,7 +32,7 @@ export default function Component() {
             <input
               type="email"
               id="email"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -49,7 +49,7 @@ export default function Component() {
               <input
                 type={showPassword ? 'text' : 'password'}
                 id="password"
-                className="block w-full px-3 py-2 border border-gray-300 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pr-10 rounded"
+                className="block w-full px-3 py-2 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pr-10 rounded"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -113,7 +113,7 @@ export default function Component() {
               </span>
             </div>
           </div>
-          <button className="w-full flex items-center justify-center border border-gray-300 text-gray-700 bg-transparent hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 py-2 px-4 rounded">
+          <button className="w-full flex items-center justify-center border border-gray-300 text-gray-700 bg-transparent hover:bg-purple-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-200 py-2 px-4 rounded transition-colors">
             <ChromeIcon className="w-5 h-5 mr-2" />
             Sign in with Google
           </button>
