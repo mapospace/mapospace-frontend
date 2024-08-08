@@ -17,17 +17,17 @@ export default function Component() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newErrors = validateForm(fname, lname, email, password, passwordAgain);
-    
+
     if (Object.keys(newErrors).length === 0) {
       const formData = {
         firstName: fname,
         lastName: lname,
         businessEmail: email,
         password: password,
-        passwordAgain:passwordAgain
+        passwordAgain: passwordAgain
       };
 
-      Axios.post('https://develop-dot-mapospacev1.el.r.appspot.com/api/v1/user/signup', formData)
+      Axios.post(`${process.env.REACT_APP_BASEURL}/user/signup`, formData)
         .then(response => {
           console.log('Form submitted successfully!', response.data);
           setSnackbar({ isVisible: true, message: 'Form submitted successfully!', type: 'success' });
@@ -143,11 +143,11 @@ export default function Component() {
           </button>
         </div>
       </div>
-      <Snackbar 
-        message={snackbar.message} 
-        type={snackbar.type} 
-        isVisible={snackbar.isVisible} 
-        onClose={handleCloseSnackbar} 
+      <Snackbar
+        message={snackbar.message}
+        type={snackbar.type}
+        isVisible={snackbar.isVisible}
+        onClose={handleCloseSnackbar}
       />
     </div>
   );
