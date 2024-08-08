@@ -19,7 +19,6 @@ export default function Component() {
     const newErrors = validateForm(fname, lname, email, password, passwordAgain);
     
     if (Object.keys(newErrors).length === 0) {
-     
       const formData = {
         firstName: fname,
         lastName: lname,
@@ -28,27 +27,21 @@ export default function Component() {
         passwordAgain:passwordAgain
       };
 
-     
       Axios.post('https://develop-dot-mapospacev1.el.r.appspot.com/api/v1/user/signup', formData)
         .then(response => {
-        
           console.log('Form submitted successfully!', response.data);
           setSnackbar({ isVisible: true, message: 'Form submitted successfully!', type: 'success' });
           setErrors({});
         })
         .catch(error => {
-         
           console.error('Error submitting form:', error);
           setSnackbar({ isVisible: true, message: 'Error submitting form. Please try again later.', type: 'error' });
         });
-
     } else {
-    
-      // setSnackbar({ isVisible: true, message: 'Please fix the errors in the form.', type: 'error' });
-      // setErrors(newErrors);
+      setSnackbar({ isVisible: true, message: 'Please fix the errors in the form.', type: 'error' });
+      setErrors(newErrors);
     }
 
- 
     setTimeout(() => {
       setSnackbar({ isVisible: false, message: '', type: '' });
     }, 3000);
@@ -57,7 +50,6 @@ export default function Component() {
   const handleCloseSnackbar = () => {
     setSnackbar({ isVisible: false, message: '', type: '' });
   };
-
 
   return (
     <div className="flex items-center justify-center mt-3 font-poppins">
@@ -158,7 +150,6 @@ export default function Component() {
         onClose={handleCloseSnackbar} 
       />
     </div>
-    
   );
 }
 
