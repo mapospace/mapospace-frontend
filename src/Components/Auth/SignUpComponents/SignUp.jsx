@@ -55,11 +55,11 @@ export default function Component() {
           });
         });
     } else {
-      setSnackbar({
-        isVisible: true,
-        message: "Please fix the errors in the form.",
-        type: "error",
-      });
+      // setSnackbar({
+      //   isVisible: true,
+      //   message: "Please fix the errors in the form.",
+      //   type: "error",
+      // });
       setErrors(newErrors);
     }
 
