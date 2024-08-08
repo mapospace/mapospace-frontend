@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import Button from "../../Common/button";
 import { validateForm } from "../../Common/validator";
-import Snackbar from '../../Common/snackbar';
-import Axios from 'axios'; // Import Axios
+import Snackbar from "../../Common/snackbar";
+import Axios from "axios";
 
 export default function Component() {
   const [fname, setFname] = useState("");
@@ -12,11 +11,21 @@ export default function Component() {
   const [password, setPassword] = useState("");
   const [passwordAgain, setPasswordAgain] = useState("");
   const [errors, setErrors] = useState({});
-  const [snackbar, setSnackbar] = useState({ isVisible: false, message: '', type: '' });
+  const [snackbar, setSnackbar] = useState({
+    isVisible: false,
+    message: "",
+    type: "",
+  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newErrors = validateForm(fname, lname, email, password, passwordAgain);
+    const newErrors = validateForm(
+      fname,
+      lname,
+      email,
+      password,
+      passwordAgain
+    );
 
     if (Object.keys(newErrors).length === 0) {
       const formData = {
@@ -24,31 +33,43 @@ export default function Component() {
         lastName: lname,
         businessEmail: email,
         password: password,
-        passwordAgain: passwordAgain
+        passwordAgain: passwordAgain,
       };
 
       Axios.post(`${process.env.REACT_APP_BASEURL}/user/signup`, formData)
-        .then(response => {
-          console.log('Form submitted successfully!', response.data);
-          setSnackbar({ isVisible: true, message: 'Form submitted successfully!', type: 'success' });
+        .then((response) => {
+          console.log("Form submitted successfully!", response.data);
+          setSnackbar({
+            isVisible: true,
+            message: "Form submitted successfully!",
+            type: "success",
+          });
           setErrors({});
         })
-        .catch(error => {
-          console.error('Error submitting form:', error);
-          setSnackbar({ isVisible: true, message: 'Error submitting form. Please try again later.', type: 'error' });
+        .catch((error) => {
+          console.error("Error submitting form:", error);
+          setSnackbar({
+            isVisible: true,
+            message: "Error submitting form. Please try again later.",
+            type: "error",
+          });
         });
     } else {
-      setSnackbar({ isVisible: true, message: 'Please fix the errors in the form.', type: 'error' });
+      setSnackbar({
+        isVisible: true,
+        message: "Please fix the errors in the form.",
+        type: "error",
+      });
       setErrors(newErrors);
     }
 
     setTimeout(() => {
-      setSnackbar({ isVisible: false, message: '', type: '' });
+      setSnackbar({ isVisible: false, message: "", type: "" });
     }, 3000);
   };
 
   const handleCloseSnackbar = () => {
-    setSnackbar({ isVisible: false, message: '', type: '' });
+    setSnackbar({ isVisible: false, message: "", type: "" });
   };
 
   return (
@@ -61,67 +82,104 @@ export default function Component() {
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="first-name"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   First Name
                 </label>
                 <input
                   id="first-name"
-                  className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.fname ? 'border-red-500' : 'border-gray-300'}`}
+                  className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
+                    errors.fname ? "border-red-500" : "border-gray-300"
+                  }`}
                   value={fname}
                   onChange={(e) => setFname(e.target.value)}
                 />
-                {errors.fname && <p className="text-red-500 text-xs mt-1">{errors.fname}</p>}
+                {errors.fname && (
+                  <p className="text-red-500 text-xs mt-1">{errors.fname}</p>
+                )}
               </div>
               <div className="space-y-2">
-                <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="last-name"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Last Name
                 </label>
                 <input
                   id="last-name"
-                  className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.lname ? 'border-red-500' : 'border-gray-300'}`}
+                  className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
+                    errors.lname ? "border-red-500" : "border-gray-300"
+                  }`}
                   value={lname}
                   onChange={(e) => setLname(e.target.value)}
                 />
-                {errors.lname && <p className="text-red-500 text-xs mt-1">{errors.lname}</p>}
+                {errors.lname && (
+                  <p className="text-red-500 text-xs mt-1">{errors.lname}</p>
+                )}
               </div>
             </div>
             <div className="space-y-2 mt-4">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Business Email
               </label>
               <input
                 id="email"
-                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
+                  errors.email ? "border-red-500" : "border-gray-300"
+                }`}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+              )}
             </div>
             <div className="space-y-2 mt-4">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Password
               </label>
               <input
                 id="password"
                 type="password"
-                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
+                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
+                  errors.password ? "border-red-500" : "border-gray-300"
+                }`}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
+              {errors.password && (
+                <p className="text-red-500 text-xs mt-1">{errors.password}</p>
+              )}
             </div>
             <div className="space-y-2 mt-4">
-              <label htmlFor="passwordAgain" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="passwordAgain"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Confirm password
               </label>
               <input
                 id="passwordAgain"
                 type="password"
-                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.passwordAgain ? 'border-red-500' : 'border-gray-300'}`}
+                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
+                  errors.passwordAgain ? "border-red-500" : "border-gray-300"
+                }`}
                 value={passwordAgain}
                 onChange={(e) => setPasswordAgain(e.target.value)}
               />
-              {errors.passwordAgain && <p className="text-red-500 text-xs mt-1">{errors.passwordAgain}</p>}
+              {errors.passwordAgain && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.passwordAgain}
+                </p>
+              )}
             </div>
             <div className="flex justify-center mt-4">
               <Button label="Sign up" />
