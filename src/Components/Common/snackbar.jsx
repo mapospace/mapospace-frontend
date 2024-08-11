@@ -1,4 +1,3 @@
-// src/components/Snackbar.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -22,7 +21,7 @@ const Snackbar = ({ message, type, isVisible, onClose }) => {
 
   return (
     <div
-      className={`fixed bottom-5 left-1/2 transform -translate-x-1/2 p-4 rounded shadow-lg text-white transition-opacity duration-300 ${getBackgroundColor(type)}`}
+      className={`fixed top-5 right-5 p-4 rounded shadow-lg text-white transition-opacity duration-300 ${getBackgroundColor(type)}`}
       role="alert"
     >
       <div className="flex items-center justify-between">
