@@ -52,15 +52,15 @@ export default function Component() {
   };
 
   return (
-    <div className="flex items-center justify-center mt-3 font-poppins">
-      <div className="flex flex-col items-center justify-center p-6 bg-white shadow-md rounded-lg">
+    <div className="flex items-center justify-center font-poppins min-h-screen">
+      <div className="flex flex-col items-center justify-center p-6 bg-white w-2/5">
         <div className="flex flex-col items-center space-y-4">
           <h1 className="text-2xl font-bold">Create Your Account</h1>
         </div>
-        <div className="w-full max-w-md mt-8 space-y-4">
+        <div className="w-full mt-8 space-y-4">
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
+              <div className="space-y-2 ">
                 <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
                   First Name
                 </label>
