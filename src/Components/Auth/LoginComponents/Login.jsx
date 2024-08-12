@@ -74,8 +74,8 @@ export default function Component() {
     setSnackbar({ isVisible: false, message: "", type: "" });
   };
   return (
-    <div className="flex items-center justify-center mt-3 font-poppins ">
-      <div className="flex flex-col items-center justify-center p-6 bg-white shadow-md rounded-lg">
+    <div className="flex items-center justify-center font-poppins min-h-screen">
+      <div className="flex flex-col items-center justify-center p-6 bg-white">
         <div className="flex flex-col items-center space-y-4">
           {/* <MapIcon className="w-12 h-12 text-blue-600" /> */}
           <h1 className="text-2xl font-bold">Welcome to Mapospace</h1>

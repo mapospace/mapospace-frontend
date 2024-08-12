@@ -13,23 +13,23 @@ import GuardedRoute from './Components/Auth/routeguard';
 function App() {
   return (
     <AuthProvider>
-    <Router>
-      <div className="App">
-        <Header />
-        <div className="content bg-gray-100">
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
+      <Router>
+        <div className="App">
+          <Header />
+          <div className="content bg-white ">
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />
             <Route path="/verify-email" element={<Varification />} />
             <Route path="/reset-password/:id" element={<Resetpassword />} />
-            <Route path="/dashboard" element={<GuardedRoute component={Dashboard} />} />
-          </Routes>
+              <Route path="/dashboard" element={<GuardedRoute component={Dashboard} />} />
+            </Routes>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </Router>
+      </Router>
     </AuthProvider>
   );
 }
