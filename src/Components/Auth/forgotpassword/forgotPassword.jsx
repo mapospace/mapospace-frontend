@@ -82,7 +82,7 @@ export default function Component() {
             Enter your email to reset your password
           </p>
         </div>
-        <div className="w-full max-w-md mt-8 space-y-4">
+        <div className="w-full max-w-md mt-4 space-y-4">
           <form onSubmit={handleSubmit}>
             <div className="space-y-2 mt-4">
               <label

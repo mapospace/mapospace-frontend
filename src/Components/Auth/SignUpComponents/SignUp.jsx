@@ -73,12 +73,12 @@ export default function Component() {
   };
 
   return (
-    <div className="flex items-center justify-center font-poppins min-h-screen">
-      <div className="flex flex-col items-center justify-center p-6 bg-white w-2/5">
+    <div className="flex items-center justify-center mt-3 font-poppins">
+      <div className="flex flex-col items-center justify-center p-6 bg-white shadow-md rounded-lg">
         <div className="flex flex-col items-center space-y-4">
           <h1 className="text-2xl font-bold">Create Your Account</h1>
         </div>
-        <div className="w-full mt-8 space-y-4">
+        <div className="w-full max-w-md mt-8 space-y-4">
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
@@ -90,8 +90,9 @@ export default function Component() {
                 </label>
                 <input
                   id="first-name"
-                  className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.fname ? "border-red-500" : "border-gray-300"
-                    }`}
+                  className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
+                    errors.fname ? "border-red-500" : "border-gray-300"
+                  }`}
                   value={fname}
                   onChange={(e) => setFname(e.target.value)}
                 />
@@ -108,8 +109,9 @@ export default function Component() {
                 </label>
                 <input
                   id="last-name"
-                  className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.lname ? "border-red-500" : "border-gray-300"
-                    }`}
+                  className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
+                    errors.lname ? "border-red-500" : "border-gray-300"
+                  }`}
                   value={lname}
                   onChange={(e) => setLname(e.target.value)}
                 />
@@ -127,8 +129,9 @@ export default function Component() {
               </label>
               <input
                 id="email"
-                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.email ? "border-red-500" : "border-gray-300"
-                  }`}
+                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
+                  errors.email ? "border-red-500" : "border-gray-300"
+                }`}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -146,8 +149,9 @@ export default function Component() {
               <input
                 id="password"
                 type="password"
-                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.password ? "border-red-500" : "border-gray-300"
-                  }`}
+                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
+                  errors.password ? "border-red-500" : "border-gray-300"
+                }`}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -165,8 +169,9 @@ export default function Component() {
               <input
                 id="passwordAgain"
                 type="password"
-                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.passwordAgain ? "border-red-500" : "border-gray-300"
-                  }`}
+                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
+                  errors.passwordAgain ? "border-red-500" : "border-gray-300"
+                }`}
                 value={passwordAgain}
                 onChange={(e) => setPasswordAgain(e.target.value)}
               />

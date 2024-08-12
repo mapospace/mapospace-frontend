@@ -16,7 +16,7 @@ function App() {
       <Router>
         <div className="App">
           <Header />
-          <div className="content bg-white ">
+          <div className="content bg-gray-100 ">
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/login" element={<Login />} />

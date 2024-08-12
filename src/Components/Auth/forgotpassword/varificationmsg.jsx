@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import Snackbar from "../../Common/snackbar";
 import Axios from "axios";
 export default function VerifyEmail() {
-  const [timer, setTimer] = useState(10);
+  const [timer, setTimer] = useState(180);
   const location = useLocation();
   const { email } = location.state || { email: "example@email.com" }; 
   useEffect(() => {

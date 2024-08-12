@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 function Header() {
   return (
-    <header className="flex h-18 items-center justify-between border-b px-6  md:px-3 md:py-3 shadow absolute top-0 w-full bg-white">
+    <header className="flex h-18 items-center justify-between border-b px-6  md:px-3 md:py-3 shadow">
       <Link href="#" className="flex items-center" prefetch={false}>
         <MapIcon className="h-12 w-12 text-blue-600" />
         <span className="sr-only">Mapospace</span>
