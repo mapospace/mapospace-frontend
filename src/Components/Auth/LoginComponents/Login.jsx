@@ -144,7 +144,7 @@ export default function Component() {
                   <span className="ml-2 text-gray-700">Remember Me</span>
                 </label>
               </div>
-              <Link href="#" className="text-sm text-blue-600" prefetch={false}>
+              <Link to="/forgotpassword" className="text-sm text-blue-600" prefetch={false}>
                 Forgot your password?
               </Link>
             </div>
