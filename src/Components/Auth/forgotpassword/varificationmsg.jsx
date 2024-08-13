@@ -23,7 +23,7 @@ export default function VerifyEmail() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-//  const newErrors = validateForm(email);
+
 
     if (email) {
       const formData = {
