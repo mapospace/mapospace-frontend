@@ -4,14 +4,16 @@ import { EyeSlashIcon } from "@heroicons/react/24/outline";
 import Snackbar from "../../Common/snackbar";
 import Button from "../../Common/button";
 import { useAuth } from "../auth";
+
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
+import logo from "../../../assets/logo.png"; 
+
 export default function Component() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [checked, setIsChecked] = useState(false);
-  // const [errors, setErrors] = useState({});
   const [snackbar, setSnackbar] = useState({
     isVisible: false,
     message: "",
@@ -28,8 +30,6 @@ export default function Component() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // const newErrors = validateForm();
-
     if (email) {
       const formData = {
         businessEmail: email,
@@ -46,7 +46,6 @@ export default function Component() {
           });
           login();
           navigate("/dashboard");
-          // setErrors({});
         })
         .catch((error) => {
           console.error("Error submitting form:", error);
@@ -62,7 +61,6 @@ export default function Component() {
         message: "Invalid credentials",
         type: "error",
       });
-      // setErrors(newErrors);
     }
 
     setTimeout(() => {
@@ -73,11 +71,12 @@ export default function Component() {
   const handleCloseSnackbar = () => {
     setSnackbar({ isVisible: false, message: "", type: "" });
   };
+
   return (
-    <div className="flex items-center justify-center mt-3 font-poppins ">
-      <div className="flex flex-col items-center justify-center p-6 bg-white shadow-md rounded-lg">
+    <div className="flex items-center justify-center font-poppins ">
+      <div className="flex flex-col items-center justify-center p-6 bg-white shadow-md rounded-md">
         <div className="flex flex-col items-center space-y-4">
-          {/* <MapIcon className="w-12 h-12 text-blue-600" /> */}
+          <img src={logo} alt="Logo" className="w-[60px] h-[60px]" />
           <h1 className="text-2xl font-bold">Welcome to Mapospace</h1>
           <p className="text-muted-foreground">
             Unlock the power of location data for your business
@@ -88,7 +87,7 @@ export default function Component() {
             <div className="space-y-2">
               <label
                 htmlFor="email"
-                className="block text-sm text-start font-medium text-gray-700 "
+                className="block text-base text-start font-medium text-black-700 "
               >
                 Email address
               </label>
@@ -100,12 +99,11 @@ export default function Component() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
-              {/* {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>} */}
             </div>
             <div className="space-y-2 relative">
               <label
                 htmlFor="password"
-                className="block text-sm text-start font-medium text-gray-700"
+                className="block text-base text-start font-medium text-black-700"
               >
                 Password
               </label>
@@ -118,7 +116,6 @@ export default function Component() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
-                {/* {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>} */}
                 <button
                   type="button"
                   onClick={handleTogglePassword}
@@ -144,7 +141,11 @@ export default function Component() {
                   <span className="ml-2 text-gray-700">Remember Me</span>
                 </label>
               </div>
-              <Link to="/forgotpassword" className="text-sm text-blue-600" prefetch={false}>
+              <Link
+                to="/forgotpassword"
+                className="text-sm text-blue-600"
+                prefetch={false}
+              >
                 Forgot your password?
               </Link>
             </div>
@@ -153,21 +154,18 @@ export default function Component() {
             <div className="text-center">
               <p className="text-sm">
                 Don't have an account?{" "}
-                {/* <Link href="#" className="text-blue-600" prefetch={false}>
-              Sign up
-            </Link> */}
                 <Link to="/signup" className="text-blue-600" prefetch={false}>
                   {" "}
                   Sign up
                 </Link>
               </p>
               <p className="text-sm mt-2">
-                By signing in, you agree to our{" "}
-                <Link href="" className="text-blue-600" prefetch={false}>
+                By signing in,you agree to our{" "}
+                <Link to="" className="text-blue-600" prefetch={false}>
                   Terms of Service
                 </Link>{" "}
                 and{" "}
-                <Link href="#" className="text-blue-600" prefetch={false}>
+                <Link to="#" className="text-blue-600" prefetch={false}>
                   Privacy Policy
                 </Link>
               </p>
@@ -243,4 +241,3 @@ function EyeIcon(props) {
     </svg>
   );
 }
-

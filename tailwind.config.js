@@ -9,10 +9,9 @@ module.exports = {
       borderRadius: {
         'none': '0',
         'sm': '0.125rem',
-        DEFAULT: '0.25rem',
-        DEFAULT: '4px',
+        'DEFAULT': '7px', 
         'md': '0.375rem',
-        'lg': '0.5rem',
+        'lg': '0.9rem',
         'full': '9999px',
         'large': '12px',
       },
@@ -54,11 +53,21 @@ module.exports = {
           foreground: 'hsl(var(--card-foreground))'
         },
       },
-      borderRadius: {
-        xl: `calc(var(--radius) + 4px)`,
-        lg: `var(--radius)`,
-        md: `calc(var(--radius) - 2px)`,
-        sm: `calc(var(--radius) - 4px)`
+      fontSize: {
+        'xs': '0.75rem',     
+        'sm': '0.85rem',     
+        'base': '1rem',      
+        'lg': '1.125rem',     
+        'xl': '1.25rem',      
+        '2xl': '1.5rem',     
+        '3xl': '1.875rem',    
+        '4xl': '2.25rem',     
+        '5xl': '3rem',        
+        '6xl': '3.75rem',     
+        '7xl': '4.5rem',      
+        '8xl': '6rem',        
+        '9xl': '8rem',       
+        'huge': '10rem',      
       },
       keyframes: {
         "accordion-down": {

@@ -5,7 +5,7 @@ const Button = ({ label, onClick }) => {
   return (
     <button
       type="submit"
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
+      className="bg-purple-700 hover:bg-purple-500 text-white font-bold py-2 px-4 rounded w-full"
       onClick={onClick}
     >
       {label}
