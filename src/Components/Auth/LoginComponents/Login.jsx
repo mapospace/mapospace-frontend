@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import logo from "../../../assets/logo.png"; 
 
-export default function Component() {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);

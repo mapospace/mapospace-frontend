@@ -4,7 +4,7 @@ import { validateForm } from "../../Common/validator";
 import Snackbar from "../../Common/snackbar";
 import Axios from "axios";
 import logo from "../../../assets/logo.png"; 
-export default function Component() {
+export default function SignUp() {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");

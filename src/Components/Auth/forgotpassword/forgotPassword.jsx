@@ -4,7 +4,7 @@ import Snackbar from "../../Common/snackbar";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function Component() {
+export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState({});
   const [snackbar, setSnackbar] = useState({
