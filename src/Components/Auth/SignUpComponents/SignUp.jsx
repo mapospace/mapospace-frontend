@@ -3,7 +3,7 @@ import Button from "../../Common/button";
 import { validateForm } from "../../Common/validator";
 import Snackbar from "../../Common/snackbar";
 import Axios from "axios";
-
+import logo from "../../../assets/logo.png"; 
 export default function Component() {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
@@ -73,9 +73,10 @@ export default function Component() {
   };
 
   return (
-    <div className="flex items-center justify-center mt-3 font-poppins">
-      <div className="flex flex-col items-center justify-center p-6 bg-white shadow-md rounded-lg">
-        <div className="flex flex-col items-center space-y-4">
+    <div className="flex items-center justify-center  font-poppins">
+      <div className="flex flex-col items-center justify-center p-6 bg-white shadow-md rounded-md" style={{ width: '510px' }}>
+        <div className="flex flex-col items-center space-y-4" >
+        <img src={logo} alt="Logo" className="w-[60px] h-[60px]" />
           <h1 className="text-2xl font-bold">Create Your Account</h1>
         </div>
         <div className="w-full max-w-md mt-8 space-y-4">
@@ -84,7 +85,7 @@ export default function Component() {
               <div className="space-y-2">
                 <label
                   htmlFor="first-name"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-black-700"
                 >
                   First Name
                 </label>
@@ -103,7 +104,7 @@ export default function Component() {
               <div className="space-y-2">
                 <label
                   htmlFor="last-name"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-black-700"
                 >
                   Last Name
                 </label>
@@ -123,7 +124,7 @@ export default function Component() {
             <div className="space-y-2 mt-4">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-black-700"
               >
                 Business Email
               </label>
@@ -142,7 +143,7 @@ export default function Component() {
             <div className="space-y-2 mt-4">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-black-700"
               >
                 Password
               </label>
@@ -162,7 +163,7 @@ export default function Component() {
             <div className="space-y-2 mt-4">
               <label
                 htmlFor="passwordAgain"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-black-700"
               >
                 Confirm password
               </label>
