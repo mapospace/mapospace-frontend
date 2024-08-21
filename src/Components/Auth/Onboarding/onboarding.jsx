@@ -3,7 +3,7 @@ import Button from "../../Common/button";
 import Snackbar from "../../Common/snackbar";
 import logo from "../../../assets/logo.png"; 
 
-export default function onboard() {
+export default function Onboard() {
   const [compamyname, setcompamyname] = useState("");
   const [email, setemail] = useState("");
   const [street, setstreet] = useState("");
