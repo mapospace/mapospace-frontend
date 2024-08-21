@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"; // Import useParams
-import Button from "../../Common/button";
+import Button from "../../Common/Button";
 import Snackbar from "../../Common/snackbar";
 import Axios from "axios";
+import Icon from "../../Common/Icon";
 
 export default function ResetPassword() {
   const { id } = useParams(); // Extract the id from the route
@@ -16,7 +17,7 @@ export default function ResetPassword() {
   });
 
   useEffect(() => {
-  
+
   }, [id]);
 
   const validateForm = (password, passwordAgain) => {
@@ -109,12 +110,14 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="flex items-center justify-center mt-3 font-poppins">
-      <div className="flex flex-col items-center justify-center p-6 bg-white shadow-md rounded-lg">
+    <div className="flex items-center justify-center font-poppins ">
+      {/* <Icon position="absolute" top="15px" left="15px" width="40px" height="40px" /> */}
+      <div className="flex flex-col items-center justify-center p-6 bg-white shadow-md rounded-md border-1 border-t-2 w-[500px] mt-20">
+        <Icon mb="20px" width="50px" height="50px" />
         <div className="flex flex-col items-center space-y-4">
           <h1 className="text-2xl font-bold">Reset Your Password</h1>
         </div>
-        <div className="w-full max-w-md mt-8 space-y-4">
+        <div className="w-full max-w-md mt-2 space-y-4">
           <form onSubmit={handleSubmit}>
             <div className="space-y-2 mt-4">
               <label
@@ -126,9 +129,8 @@ export default function ResetPassword() {
               <input
                 id="password"
                 type="password"
-                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
-                  errors.password ? "border-red-500" : "border-gray-300"
-                }`}
+                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.password ? "border-red-500" : "border-gray-300"
+                  }`}
                 value={password}
                 onChange={handlePasswordChange}
               />
@@ -146,9 +148,8 @@ export default function ResetPassword() {
               <input
                 id="passwordAgain"
                 type="password"
-                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
-                  errors.passwordAgain ? "border-red-500" : "border-gray-300"
-                }`}
+                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.passwordAgain ? "border-red-500" : "border-gray-300"
+                  }`}
                 value={passwordAgain}
                 onChange={handlePasswordAgainChange}
               />
@@ -158,8 +159,8 @@ export default function ResetPassword() {
                 </p>
               )}
             </div>
-            <div className="flex justify-center mt-4">
-              <Button label="Submit" />
+            <div className="flex justify-center mt-6">
+              <Button label="Submit" width="40%" />
             </div>
           </form>
         </div>

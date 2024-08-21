@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import Button from "../../Common/button";
+import Button from "../../Common/Button";
 import { validateForm } from "../../Common/validator";
 import Snackbar from "../../Common/snackbar";
 import Axios from "axios";
-import logo from "../../../assets/logo.png"; 
+import logo from "../../../assets/logo.png";
+import { Link } from "react-router-dom";
 export default function SignUp() {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
@@ -73,16 +74,16 @@ export default function SignUp() {
   };
 
   return (
-    <div className="flex items-center justify-center  font-poppins">
-      <div className="flex flex-col items-center justify-center p-6 bg-white shadow-md rounded-md" style={{ width: '510px' }}>
-        <div className="flex flex-col items-center space-y-4" >
-        <img src={logo} alt="Logo" className="w-[60px] h-[60px]" />
-          <h1 className="text-2xl font-bold">Create Your Account</h1>
+    <div className="flex items-center justify-center font-poppins ">
+      <div className="flex flex-col items-center justify-center px-6 pt-2 pb-4 border-1 border-t-2 bg-white shadow-xl rounded-md" style={{ width: '550px' }}>
+        <div className="flex flex-col items-center space-y-4 " >
+          <img src={logo} alt="Logo" className="w-[60px] h-[60px]" />
+          <h1 className="text-xl font-bold">Create Your Account</h1>
         </div>
-        <div className="w-full max-w-md mt-8 space-y-4">
+        <div className="w-full max-w-lg mt-4 space-y-4">
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
+              <div className="space-y-1">
                 <label
                   htmlFor="first-name"
                   className="block text-sm font-medium text-black-700"
@@ -91,9 +92,8 @@ export default function SignUp() {
                 </label>
                 <input
                   id="first-name"
-                  className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
-                    errors.fname ? "border-red-500" : "border-gray-300"
-                  }`}
+                  className={`mt-1 block w-full px-3 py-1 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.fname ? "border-red-500" : "border-gray-300"
+                    }`}
                   value={fname}
                   onChange={(e) => setFname(e.target.value)}
                 />
@@ -101,7 +101,7 @@ export default function SignUp() {
                   <p className="text-red-500 text-xs mt-1">{errors.fname}</p>
                 )}
               </div>
-              <div className="space-y-2">
+              <div className="space-y-1">
                 <label
                   htmlFor="last-name"
                   className="block text-sm font-medium text-black-700"
@@ -110,9 +110,8 @@ export default function SignUp() {
                 </label>
                 <input
                   id="last-name"
-                  className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
-                    errors.lname ? "border-red-500" : "border-gray-300"
-                  }`}
+                  className={`mt-1 block w-full px-3 py-1 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.lname ? "border-red-500" : "border-gray-300"
+                    }`}
                   value={lname}
                   onChange={(e) => setLname(e.target.value)}
                 />
@@ -121,7 +120,7 @@ export default function SignUp() {
                 )}
               </div>
             </div>
-            <div className="space-y-2 mt-4">
+            <div className="space-y-1 mt-4">
               <label
                 htmlFor="email"
                 className="block text-sm font-medium text-black-700"
@@ -130,9 +129,8 @@ export default function SignUp() {
               </label>
               <input
                 id="email"
-                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
-                  errors.email ? "border-red-500" : "border-gray-300"
-                }`}
+                className={`mt-1 block w-full px-3 py-1 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.email ? "border-red-500" : "border-gray-300"
+                  }`}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -140,7 +138,7 @@ export default function SignUp() {
                 <p className="text-red-500 text-xs mt-1">{errors.email}</p>
               )}
             </div>
-            <div className="space-y-2 mt-4">
+            <div className="space-y-1 mt-4">
               <label
                 htmlFor="password"
                 className="block text-sm font-medium text-black-700"
@@ -150,9 +148,8 @@ export default function SignUp() {
               <input
                 id="password"
                 type="password"
-                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
-                  errors.password ? "border-red-500" : "border-gray-300"
-                }`}
+                className={`mt-1 block w-full px-3 py-1 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.password ? "border-red-500" : "border-gray-300"
+                  }`}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -160,7 +157,7 @@ export default function SignUp() {
                 <p className="text-red-500 text-xs mt-1">{errors.password}</p>
               )}
             </div>
-            <div className="space-y-2 mt-4">
+            <div className="space-y-1 mt-4">
               <label
                 htmlFor="passwordAgain"
                 className="block text-sm font-medium text-black-700"
@@ -170,9 +167,8 @@ export default function SignUp() {
               <input
                 id="passwordAgain"
                 type="password"
-                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
-                  errors.passwordAgain ? "border-red-500" : "border-gray-300"
-                }`}
+                className={`mt-1 block w-full px-3 py-1 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.passwordAgain ? "border-red-500" : "border-gray-300"
+                  }`}
                 value={passwordAgain}
                 onChange={(e) => setPasswordAgain(e.target.value)}
               />
@@ -200,6 +196,16 @@ export default function SignUp() {
             <ChromeIcon className="w-5 h-5 mr-2" />
             Sign up with google
           </button>
+          <div className="flex justify-center align-middle">
+
+            <h1 className="text-sm ">Already have a account ?
+              <span>
+                <Link to="/" className="text-blue-600 font-semibold" prefetch={false}>
+                  {" "}
+                  Login
+                </Link>
+              </span></h1>
+          </div>
         </div>
       </div>
       <Snackbar
