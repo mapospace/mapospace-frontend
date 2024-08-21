@@ -8,6 +8,7 @@ import Resetpassword from './Components/Auth/ResetPasswordComponent/ResetPasswor
 import ForgotPassword from './Components/Auth/forgotpassword/ForgotPassword';
 import Varification from './Components/Auth/forgotpassword/VerifyEmail';
 import Dashboard from './Components/Dashboard/dashoard';
+import Onboard from './Components/Auth/Onboarding/onboarding';
 import { AuthProvider } from './Components/Auth/auth';
 import GuardedRoute from './Components/Auth/routeguard';
 
