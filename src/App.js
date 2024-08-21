@@ -8,9 +8,9 @@ import Resetpassword from './Components/Auth/ResetPasswordComponent/ResetPasswor
 import ForgotPassword from './Components/Auth/forgotpassword/ForgotPassword';
 import Varification from './Components/Auth/forgotpassword/VerifyEmail';
 import Dashboard from './Components/Dashboard/dashoard';
-import Onboard from './Components/Auth/Onboarding/onboarding';
 import { AuthProvider } from './Components/Auth/auth';
 import GuardedRoute from './Components/Auth/routeguard';
+import OnBoardDetails from './Components/Auth/Onboarding/OnBoardDetails'
 
 
 function AppContent() {
@@ -33,10 +33,12 @@ function AppContent() {
           <Route path="/verify-email" element={<Varification />} />
           <Route path="/reset-password/:id" element={<Resetpassword />} />
           <Route path="/dashboard" element={<GuardedRoute component={Dashboard} />} />
+          <Route path="/onboard" element={<OnBoardDetails />}></Route>
         </Routes>
-      </div>
-      {!isForgotPassword && <Footer />}
-    </div>
+      </div >
+      {!isForgotPassword && <Footer />
+      }
+    </div >
   );
 }
 
