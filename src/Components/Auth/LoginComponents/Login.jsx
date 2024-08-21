@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { EyeSlashIcon } from "@heroicons/react/24/outline";
 import Snackbar from "../../Common/snackbar";
-import Button from "../../Common/button";
+import Button from "../../Common/Button";
 import { useAuth } from "../auth";
 
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
-import logo from "../../../assets/logo.png"; 
+import logo from "../../../assets/logo.png";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -74,8 +74,8 @@ export default function Login() {
 
   return (
     <div className="flex items-center justify-center font-poppins ">
-      <div className="flex flex-col items-center justify-center p-6 bg-white shadow-md rounded-md">
-        <div className="flex flex-col items-center space-y-4">
+      <div className="flex flex-col items-center justify-center py-3 px-9 bg-white shadow-2xl rounded-md border-1 border-t-2">
+        <div className="flex flex-col items-center space-y-2">
           <img src={logo} alt="Logo" className="w-[60px] h-[60px]" />
           <h1 className="text-2xl font-bold">Welcome to Mapospace</h1>
           <p className="text-muted-foreground">
@@ -83,7 +83,7 @@ export default function Login() {
           </p>
         </div>
         <form onSubmit={handleSubmit}>
-          <div className="w-full max-w-md mt-8 space-y-4">
+          <div className="w-full max-w-md mt-4 space-y-4">
             <div className="space-y-2">
               <label
                 htmlFor="email"
@@ -94,7 +94,7 @@ export default function Login() {
               <input
                 type="email"
                 id="email"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded"
+                className="mt-1 block w-full px-3 py-1.5 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -111,7 +111,7 @@ export default function Login() {
                 <input
                   type={showPassword ? "text" : "password"}
                   id="password"
-                  className="block w-full px-3 py-2 border border-gray-300 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pr-10 rounded"
+                  className="block w-full px-3 py-1.5 border border-gray-300 shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pr-10 rounded"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -141,31 +141,31 @@ export default function Login() {
                   <span className="ml-2 text-gray-700">Remember Me</span>
                 </label>
               </div>
-              <Link
-                to="/forgotpassword"
-                className="text-sm text-blue-600"
-                prefetch={false}
+              <a
+                href="/forgotpassword"
+                className="text-sm text-blue-600 font-semibold"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Forgot your password?
-              </Link>
+              </a>
             </div>
             <Button label="Login" />
 
             <div className="text-center">
               <p className="text-sm">
-                Don't have an account?{" "}
-                <Link to="/signup" className="text-blue-600" prefetch={false}>
-                  {" "}
+                Don't have an account?
+                <Link to="/signup" className="text-blue-600 font-semibold px-1" prefetch={false}>
                   Sign up
                 </Link>
               </p>
               <p className="text-sm mt-2">
-                By signing in,you agree to our{" "}
-                <Link to="" className="text-blue-600" prefetch={false}>
+                By signing in,you agree to our
+                <Link to="" className="text-blue-600 font-semibold px-1" prefetch={false}>
                   Terms of Service
-                </Link>{" "}
-                and{" "}
-                <Link to="#" className="text-blue-600" prefetch={false}>
+                </Link>
+                and
+                <Link to="#" className="text-blue-600 font-semibold pl-1" prefetch={false}>
                   Privacy Policy
                 </Link>
               </p>
@@ -188,14 +188,14 @@ export default function Login() {
           isVisible={snackbar.isVisible}
           onClose={handleCloseSnackbar}
         />
-        <div className="w-full max-w-md mt-6 space-y-4">
+        <div className="w-full max-w-md mt-2 mb-2 space-y-4">
           <button className="w-full flex items-center justify-center border border-gray-300 text-gray-700 bg-transparent hover:bg-purple-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-200 py-2 px-4 rounded transition-colors">
             <ChromeIcon className="w-5 h-5 mr-2" />
             Sign in with Google
           </button>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
 

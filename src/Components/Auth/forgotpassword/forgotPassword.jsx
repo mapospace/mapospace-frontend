@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import Button from "../../Common/button";
+import Button from "../../Common/Button";
 import Snackbar from "../../Common/snackbar";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Icon from "../../Common/Icon";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -44,7 +45,7 @@ export default function ForgotPassword() {
             message: response.data.message || (success ? "Password reset email sent successfully!" : "Form submission failed."),
             type: success ? "success" : "error",
           });
-        
+
           setErrors({});
           if (success) {
             navigate("/verify-email", { state: { email } });
@@ -74,28 +75,22 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="flex items-center justify-center mt-5 font-poppins">
-      <div className="flex flex-col items-center justify-center p-6 bg-white shadow-md rounded-lg">
+    <div className="flex items-center justify-center font-poppins">
+      <div className="flex flex-col items-center justify-center p-6 mt-14 bg-white shadow-md rounded-md w-[600px] border-1 border-t-2">
+        <Icon mb="20px" width="50px" height="50px" />
         <div className="flex flex-col items-center space-y-4">
           <h1 className="text-2xl font-bold">Forgot Password</h1>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground ">
             Enter your email to reset your password
           </p>
         </div>
-        <div className="w-full max-w-md mt-4 space-y-4">
+        <div className="w-full mt-4 space-y-4">
           <form onSubmit={handleSubmit}>
             <div className="space-y-2 mt-4">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Email
-              </label>
               <input
                 id="email"
-                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
-                  errors.email ? "border-red-500" : "border-gray-300"
-                }`}
+                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.email ? "border-red-500" : "border-gray-300"
+                  }`}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -104,7 +99,7 @@ export default function ForgotPassword() {
               )}
             </div>
             <div className="flex justify-center mt-4">
-              <Button label="Reset Password" />
+              <Button label="Reset Password" width="50%" />
             </div>
           </form>
         </div>
