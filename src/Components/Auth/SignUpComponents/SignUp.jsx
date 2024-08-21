@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "../../Common/Button";
+import Button from "../../Common/button";
 import { validateForm } from "../../Common/validator";
 import Snackbar from "../../Common/snackbar";
 import Axios from "axios";

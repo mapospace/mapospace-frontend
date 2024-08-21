@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"; // Import useParams
-import Button from "../../Common/Button";
+import Button from "../../Common/button";
 import Snackbar from "../../Common/snackbar";
 import Axios from "axios";
 import Icon from "../../Common/Icon";
