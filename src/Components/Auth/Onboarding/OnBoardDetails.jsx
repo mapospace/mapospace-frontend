@@ -14,7 +14,6 @@ export default function OnBoardDetails() {
   const [zip, setzip] = useState("");
   const [country, setCountry] = useState("");
   const [industry, setIndustry] = useState("");
-
   const [snackbar, setSnackbar] = useState({
     isVisible: false,
     message: "",
