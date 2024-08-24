@@ -2,21 +2,29 @@ import React, { useState } from "react";
 import Button from "../../Common/Button";
 import { validateForm } from "../../Common/validator";
 import Snackbar from "../../Common/snackbar";
-import Axios from "axios";
 import logo from "../../../assets/logo.png";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import axios from "axios";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+
 export default function SignUp() {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordAgain, setPasswordAgain] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState(false);
   const [errors, setErrors] = useState({});
   const [snackbar, setSnackbar] = useState({
     isVisible: false,
     message: "",
     type: "",
   });
+
+  const handleTogglePassword = () => {
+    setConfirmPassword(!confirmPassword);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -37,7 +45,7 @@ export default function SignUp() {
         passwordAgain: passwordAgain,
       };
 
-      Axios.post(`${process.env.REACT_APP_BASEURL}/user/signup`, formData)
+      axios.post(`${process.env.REACT_APP_BASEURL}/user/signup`, formData)
         .then((response) => {
           console.log("Form submitted successfully!", response.data);
           setSnackbar({
@@ -49,11 +57,24 @@ export default function SignUp() {
         })
         .catch((error) => {
           console.error("Error submitting form:", error);
-          setSnackbar({
-            isVisible: true,
-            message: "Error submitting form. Please try again later.",
-            type: "error",
-          });
+
+          if (error.response) {
+            // Extract the error message from the response
+            const errorMessage = error.response.data.message || "Error submitting form. Please try again later.";
+
+            setSnackbar({
+              isVisible: true,
+              message: errorMessage,
+              type: "error",
+            });
+          } else {
+            // Handle cases where there is no response from the server (e.g., network error)
+            setSnackbar({
+              isVisible: true,
+              message: "Network error. Please check your connection and try again.",
+              type: "error",
+            });
+          }
         });
     } else {
       // setSnackbar({
@@ -75,7 +96,14 @@ export default function SignUp() {
 
   return (
     <div className="flex items-center justify-center font-poppins ">
-      <div className="flex flex-col items-center justify-center px-6 pt-2 pb-4 border-1 border-t-2 bg-white shadow-xl rounded-md" style={{ width: '550px' }}>
+      <motion.div className="flex flex-col items-center justify-center px-6 pt-2 pb-4 border-1 border-t-2 bg-white shadow-xl rounded-md" style={{ width: '550px' }}
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 0.8,
+          delay: 0.2,
+          ease: [0, 0.71, 0.2, 1.01]
+        }}>
         <div className="flex flex-col items-center space-y-4 " >
           <img src={logo} alt="Logo" className="w-[60px] h-[60px]" />
           <h1 className="text-xl font-bold">Create Your Account</h1>
@@ -164,14 +192,28 @@ export default function SignUp() {
               >
                 Confirm password
               </label>
-              <input
-                id="passwordAgain"
-                type="password"
-                className={`mt-1 block w-full px-3 py-1 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.passwordAgain ? "border-red-500" : "border-gray-300"
-                  }`}
-                value={passwordAgain}
-                onChange={(e) => setPasswordAgain(e.target.value)}
-              />
+              <div className="mt-1 relative">
+                <input
+                  id="passwordAgain"
+                  type={confirmPassword ? "text" : "password"}
+                  className={`mt-1 block w-full px-3 py-1 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.passwordAgain ? "border-red-500" : "border-gray-300"
+                    }`}
+                  value={passwordAgain}
+                  onChange={(e) => setPasswordAgain(e.target.value)}
+                />
+                <button
+                  type="button"
+                  onClick={handleTogglePassword}
+                  className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500"
+                >
+                  {confirmPassword ? (
+                    <EyeSlashIcon className="h-5 w-5" />
+                  ) : (
+                    <EyeIcon className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
+
               {errors.passwordAgain && (
                 <p className="text-red-500 text-xs mt-1">
                   {errors.passwordAgain}
@@ -207,7 +249,7 @@ export default function SignUp() {
               </span></h1>
           </div>
         </div>
-      </div>
+      </motion.div>
       <Snackbar
         message={snackbar.message}
         type={snackbar.type}

@@ -8,6 +8,7 @@ import { useAuth } from "../auth";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import logo from "../../../assets/logo.png";
+import { motion } from "framer-motion";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -74,7 +75,14 @@ export default function Login() {
 
   return (
     <div className="flex items-center justify-center font-poppins ">
-      <div className="flex flex-col items-center justify-center py-3 px-9 bg-white shadow-2xl rounded-md border-1 border-t-2">
+      <motion.div className="flex flex-col items-center justify-center py-3 px-9 bg-white shadow-2xl rounded-md border-1 border-t-2"
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 0.8,
+          delay: 0.2,
+          ease: [0, 0.71, 0.2, 1.01]
+        }}>
         <div className="flex flex-col items-center space-y-2">
           <img src={logo} alt="Logo" className="w-[60px] h-[60px]" />
           <h1 className="text-2xl font-bold">Welcome to Mapospace</h1>
@@ -194,7 +202,7 @@ export default function Login() {
             Sign in with Google
           </button>
         </div>
-      </div >
+      </motion.div >
     </div >
   );
 }

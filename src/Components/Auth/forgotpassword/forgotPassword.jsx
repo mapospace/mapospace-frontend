@@ -4,6 +4,7 @@ import Snackbar from "../../Common/snackbar";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Icon from "../../Common/Icon";
+import { motion } from "framer-motion";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -76,7 +77,14 @@ export default function ForgotPassword() {
 
   return (
     <div className="flex items-center justify-center font-poppins">
-      <div className="flex flex-col items-center justify-center p-6 mt-14 bg-white shadow-md rounded-md w-[600px] border-1 border-t-2">
+      <motion.div className="flex flex-col items-center justify-center p-6 mt-14 bg-white shadow-md rounded-md w-[600px] border-1 border-t-2"
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 0.8,
+          delay: 0.2,
+          ease: [0, 0.71, 0.2, 1.01]
+        }}>
         <Icon mb="20px" width="50px" height="50px" />
         <div className="flex flex-col items-center space-y-4">
           <h1 className="text-2xl font-bold">Forgot Password</h1>
@@ -103,7 +111,7 @@ export default function ForgotPassword() {
             </div>
           </form>
         </div>
-      </div>
+      </motion.div>
       <Snackbar
         message={snackbar.message}
         type={snackbar.type}

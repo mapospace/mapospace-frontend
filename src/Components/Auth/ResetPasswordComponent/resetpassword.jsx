@@ -4,12 +4,15 @@ import Button from "../../Common/Button";
 import Snackbar from "../../Common/snackbar";
 import Axios from "axios";
 import Icon from "../../Common/Icon";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 export default function ResetPassword() {
   const { id } = useParams(); // Extract the id from the route
   const [password, setPassword] = useState("");
   const [passwordAgain, setPasswordAgain] = useState("");
   const [errors, setErrors] = useState({});
+  const [confirmPassword, setConfirmPassword] = useState(false);
+  const [newPassword, setNewPassword] = useState(false);
   const [snackbar, setSnackbar] = useState({
     isVisible: false,
     message: "",
@@ -50,6 +53,14 @@ export default function ResetPassword() {
     if (errors.password) {
       setErrors((prevErrors) => ({ ...prevErrors, password: null }));
     }
+  };
+
+  const handleTogglePassword = () => {
+    setConfirmPassword(!confirmPassword);
+  };
+
+  const handleToggleNewPassword = () => {
+    setNewPassword(!newPassword);
   };
 
   const handlePasswordAgainChange = (e) => {
@@ -126,33 +137,60 @@ export default function ResetPassword() {
               >
                 New password
               </label>
-              <input
-                id="password"
-                type="password"
-                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.password ? "border-red-500" : "border-gray-300"
-                  }`}
-                value={password}
-                onChange={handlePasswordChange}
-              />
+              <div className="mt-1 relative">
+                <input
+                  id="password"
+                  type={newPassword ? "text" : "password"}
+                  className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.password ? "border-red-500" : "border-gray-300"
+                    }`}
+                  value={password}
+                  onChange={handlePasswordChange}
+                />
+                <button
+                  type="button"
+                  onClick={handleToggleNewPassword}
+                  className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500"
+                >
+                  {newPassword ? (
+                    <EyeSlashIcon className="h-5 w-5" />
+                  ) : (
+                    <EyeIcon className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
+
               {errors.password && (
                 <p className="text-red-500 text-xs mt-1">{errors.password}</p>
               )}
             </div>
-            <div className="space-y-2 mt-4">
+            <div className="space-y-2 mt-4 relative">
               <label
                 htmlFor="passwordAgain"
                 className="block text-sm font-medium text-gray-700"
               >
                 Confirm new password
               </label>
-              <input
-                id="passwordAgain"
-                type="password"
-                className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.passwordAgain ? "border-red-500" : "border-gray-300"
-                  }`}
-                value={passwordAgain}
-                onChange={handlePasswordAgainChange}
-              />
+              <div className="mt-1 relative">
+                <input
+                  id="passwordAgain"
+                  type={confirmPassword ? "text" : "password"}
+                  className={`mt-1 block w-full px-3 py-2 border rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${errors.passwordAgain ? "border-red-500" : "border-gray-300"
+                    }`}
+                  value={passwordAgain}
+                  onChange={handlePasswordAgainChange}
+                />
+                <button
+                  type="button"
+                  onClick={handleTogglePassword}
+                  className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500"
+                >
+                  {confirmPassword ? (
+                    <EyeSlashIcon className="h-5 w-5" />
+                  ) : (
+                    <EyeIcon className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
               {errors.passwordAgain && (
                 <p className="text-red-500 text-xs mt-1">
                   {errors.passwordAgain}
@@ -164,13 +202,13 @@ export default function ResetPassword() {
             </div>
           </form>
         </div>
-      </div>
+      </div >
       <Snackbar
         message={snackbar.message}
         type={snackbar.type}
         isVisible={snackbar.isVisible}
         onClose={handleCloseSnackbar}
       />
-    </div>
+    </div >
   );
 }
