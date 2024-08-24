@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "../../Common/Button";
+import Button from "../../Common/button";
 import Snackbar from "../../Common/snackbar";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "../../Common/Button";
+import Button from "../../Common/button";
 import Snackbar from "../../Common/snackbar";
 import logo from "../../../assets/logo.png";
 import Icon from "../../Common/Icon";
@@ -14,7 +14,6 @@ export default function OnBoardDetails() {
   const [zip, setzip] = useState("");
   const [country, setCountry] = useState("");
   const [industry, setIndustry] = useState("");
-
   const [snackbar, setSnackbar] = useState({
     isVisible: false,
     message: "",
