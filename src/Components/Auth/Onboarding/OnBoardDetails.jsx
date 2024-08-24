@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "../../Common/button";
+import Button from "../../Common/Button";
 import Snackbar from "../../Common/snackbar";
 import logo from "../../../assets/logo.png";
 import Icon from "../../Common/Icon";

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { EyeSlashIcon } from "@heroicons/react/24/outline";
 import Snackbar from "../../Common/snackbar";
-import Button from "../../Common/button";
+import Button from "../../Common/Button";
 import { useAuth } from "../auth";
 
 import { useNavigate } from "react-router-dom";
