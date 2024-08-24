@@ -46,7 +46,13 @@ export default function Login() {
             type: "success",
           });
           login();
-          navigate("/dashboard");
+          if(response.tenantExists){
+            navigate("/dashboard");
+          }
+          else{
+            navigate("/onboard");
+          }
+         
         })
         .catch((error) => {
           console.error("Error submitting form:", error);
