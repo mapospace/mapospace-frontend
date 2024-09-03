@@ -15,7 +15,7 @@ export default function VerifyEmail() {
       return () => clearInterval(intervalId);
     }
   }, [timer]);
-  const [errors, setErrors] = useState({});
+  // const [errors, setErrors] = useState({});
   const [snackbar, setSnackbar] = useState({
     isVisible: false,
     message: "",
