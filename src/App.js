@@ -4,13 +4,13 @@ import Login from './Components/Auth/LoginComponents/Login';
 import Header from './Components/Common/Header';
 import Footer from './Components/Common/Footer';
 import SignUp from './Components/Auth/SignUpComponents/SignUp';
-import Resetpassword from './Components/Auth/ResetPasswordComponent/ResetPassword';
-import ForgotPassword from './Components/Auth/forgotpassword/ForgotPassword';
 import Varification from './Components/Auth/forgotpassword/VerifyEmail';
 import Dashboard from './Components/Dashboard/dashoard';
 import { AuthProvider } from './Components/Auth/auth';
 import GuardedRoute from './Components/Auth/routeguard';
 import OnBoardDetails from './Components/Auth/Onboarding/OnBoardDetails'
+import ForgotPassword from './Components/Auth/forgotpassword/ForgotPassword';
+// import ResetPassword from './Components/Auth/ResetPasswordComponent/ResetPassword';
 
 
 function AppContent() {
@@ -31,7 +31,7 @@ function AppContent() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/verify-email" element={<Varification />} />
-          <Route path="/reset-password/:id" element={<Resetpassword />} />
+          {/* <Route path="/reset-password/:id" element={<ResetPassword />} /> */}
           <Route path="/dashboard" element={<GuardedRoute component={Dashboard} />} />
           <Route path="/onboard" element={<OnBoardDetails />}></Route>
         </Routes>
