@@ -26,7 +26,7 @@ function AppContent() {
       {isDashboard && <Header />}
       <div className={`content bg-white-100 flex-1 overflow-y-auto mb-12 ${isDashboard ? '' : 'pt-12'}`}>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/mapospace-frontend" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           {/* <Route path="/forgotpassword" element={<ForgotPassword />} /> */}
