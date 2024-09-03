@@ -1,34 +1,35 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import logo from "../../assets/logo.png";
 function Header() {
-    return (
-        <header className="flex h-18 items-center justify-between border-b px-6  md:px-3 md:py-3 shadow">
-        <Link href="#" className="flex items-center" prefetch={false}>
-          <MapIcon className="h-12 w-12 text-blue-600" />
-          <span className="sr-only">Mapospace</span>
-        </Link>
-      </header>
-    );
+  return (
+    <header className="flex h-18 items-center justify-between border-b px-6  md:px-3 md:py-3 shadow">
+      <Link href="#" className="flex items-center" prefetch={false}>
+        <img src={logo} alt="Logo" className="w-[60px] h-[60px]" />
+        <span className="sr-only">Mapospace</span>
+      </Link>
+    </header>
+  );
 }
 
 export default Header;
-function MapIcon(props) {
-    return (
-      <svg
-        {...props}
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" />
-        <path d="M15 5.764v15" />
-        <path d="M9 3.236v15" />
-      </svg>
-    );
-  }
+// function MapIcon(props) {
+//   return (
+//     <svg
+//       {...props}
+//       xmlns="http://www.w3.org/2000/svg"
+//       width="24"
+//       height="24"
+//       viewBox="0 0 24 24"
+//       fill="none"
+//       stroke="currentColor"
+//       strokeWidth="2"
+//       strokeLinecap="round"
+//       strokeLinejoin="round"
+//     >
+//       <path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" />
+//       <path d="M15 5.764v15" />
+//       <path d="M9 3.236v15" />
+//     </svg>
+//   );
+// }
