@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "../../Common/Button";
+// import Button from "../../Common/Button";
 import Snackbar from "../../Common/snackbar";
 import Icon from "../../Common/Icon";
 import Axios from "axios";
@@ -47,7 +47,7 @@ export default function OnBoardDetails() {
     "USA",
     "Canada",
     "India",
- 
+
   ];
 
   const validateCompanyName = (name) => {
@@ -100,7 +100,7 @@ export default function OnBoardDetails() {
     return "";
   };
 
- 
+
 
   const handleInputChange = (e, validator, setState) => {
     const { id, value } = e.target;
@@ -131,42 +131,42 @@ export default function OnBoardDetails() {
 
     if (Object.values(newErrors).every((error) => error === "")) {
       const emailDomain = email.substring(email.lastIndexOf("@") + 1);
-   
+
       const formData = {
-       "companyName": compamyname,
-  "address": {
-    "street": email,
-    "city": city,
-    "state": state,
-    "zipCode": zip,
-    "country": country
-  },
-  "contactEmail": email,
-  "contactPhone": phone,
-  "industry": industry,
-  "businessEmailDomain":emailDomain
+        "companyName": compamyname,
+        "address": {
+          "street": email,
+          "city": city,
+          "state": state,
+          "zipCode": zip,
+          "country": country
+        },
+        "contactEmail": email,
+        "contactPhone": phone,
+        "industry": industry,
+        "businessEmailDomain": emailDomain
       };
 
-     
-      Axios.post(`${process.env.REACT_APP_BASEURL}tenant/onboard-tenant`, formData)
-      .then((response) => {
-        console.log("Form submitted successfully!", response.data);
-        setSnackbar({
-          isVisible: true,
-          message: "Form submitted successfully!",
-          type: "success",
-        });
 
-        setErrors({});
-      })
-      .catch((error) => {
-        console.error("Error submitting form:", error);
-        setSnackbar({
-          isVisible: true,
-          message: "Error submitting form. Please try again later.",
-          type: "error",
+      Axios.post(`${process.env.REACT_APP_BASEURL}tenant/onboard-tenant`, formData)
+        .then((response) => {
+          console.log("Form submitted successfully!", response.data);
+          setSnackbar({
+            isVisible: true,
+            message: "Form submitted successfully!",
+            type: "success",
+          });
+
+          setErrors({});
+        })
+        .catch((error) => {
+          console.error("Error submitting form:", error);
+          setSnackbar({
+            isVisible: true,
+            message: "Error submitting form. Please try again later.",
+            type: "error",
+          });
         });
-      });
     } else {
       setSnackbar({
         isVisible: true,
@@ -177,10 +177,10 @@ export default function OnBoardDetails() {
     setTimeout(() => {
       setSnackbar({ isVisible: false, message: "", type: "" });
     }, 3000);
-};
-const handleCloseSnackbar = () => {
-  setSnackbar({ isVisible: false, message: "", type: "" });
-};
+  };
+  const handleCloseSnackbar = () => {
+    setSnackbar({ isVisible: false, message: "", type: "" });
+  };
 
   return (
     <div className="flex items-center justify-center font-poppins mt-3">
@@ -345,20 +345,20 @@ const handleCloseSnackbar = () => {
               </div>
             </div>
             <div className="flex justify-center mt-4">
-              <Button label="Submit" />
+              {/* <Button label="Submit" /> */}
             </div>
           </form>
         </div>
         {snackbar.isVisible && (
-  <>
-  
-    <Snackbar
-      type={snackbar.type}
-      message={snackbar.message}
-      onClose={handleCloseSnackbar}
-    />
-  </>
-)}
+          <>
+
+            <Snackbar
+              type={snackbar.type}
+              message={snackbar.message}
+              onClose={handleCloseSnackbar}
+            />
+          </>
+        )}
       </div>
     </div>
   );

@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { EyeSlashIcon } from "@heroicons/react/24/outline";
 import Snackbar from "../../Common/snackbar";
-import Button from "../../Common/Button";
 import { useAuth } from "../auth";
 
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import logo from "../../../assets/logo.png";
 import { motion } from "framer-motion";
+// import Button from "../../Common/Button";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -46,13 +46,13 @@ export default function Login() {
             type: "success",
           });
           login();
-          if(response.tenantExists){
+          if (response.tenantExists) {
             navigate("/dashboard");
           }
-          else{
+          else {
             navigate("/onboard");
           }
-         
+
         })
         .catch((error) => {
           console.error("Error submitting form:", error);
@@ -164,7 +164,7 @@ export default function Login() {
                 Forgot your password?
               </a>
             </div>
-            <Button label="Login" />
+            {/* <Button label="Login" /> */}
 
             <div className="text-center">
               <p className="text-sm">

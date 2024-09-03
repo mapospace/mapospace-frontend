@@ -1,6 +1,5 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Login from './Components/Auth/LoginComponents/Login';
 import Header from './Components/Common/Header';
 import Footer from './Components/Common/Footer';
 import SignUp from './Components/Auth/SignUpComponents/SignUp';
@@ -9,7 +8,8 @@ import Dashboard from './Components/Dashboard/dashoard';
 import { AuthProvider } from './Components/Auth/auth';
 import GuardedRoute from './Components/Auth/routeguard';
 import OnBoardDetails from './Components/Auth/Onboarding/OnBoardDetails'
-import ForgotPassword from './Components/Auth/forgotpassword/ForgotPassword';
+import Login from './Components/Auth/LoginComponents/Login';
+// import ForgotPassword from './Components/Auth/forgotpassword/ForgotPassword';
 // import ResetPassword from './Components/Auth/ResetPasswordComponent/ResetPassword';
 
 
@@ -29,7 +29,7 @@ function AppContent() {
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          {/* <Route path="/forgotpassword" element={<ForgotPassword />} /> */}
           <Route path="/verify-email" element={<Varification />} />
           {/* <Route path="/reset-password/:id" element={<ResetPassword />} /> */}
           <Route path="/dashboard" element={<GuardedRoute component={Dashboard} />} />

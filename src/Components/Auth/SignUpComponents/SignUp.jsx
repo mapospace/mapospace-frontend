@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "../../Common/Button";
+// import Button from "../../Common/Button";
 import { validateForm } from "../../Common/validator";
 import Snackbar from "../../Common/snackbar";
 import logo from "../../../assets/logo.png";
@@ -221,7 +221,7 @@ export default function SignUp() {
               )}
             </div>
             <div className="flex justify-center mt-4">
-              <Button label="Sign up" />
+              {/* <Button label="Sign up" /> */}
             </div>
           </form>
           <div className="relative my-4">
