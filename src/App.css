@@ -15,8 +15,7 @@
 
 .content {
   flex-grow: 1;
-  overflow-y: auto;
-  /* Allows scrolling inside the content area if needed */
+  /* overflow-y: auto; */
 }
 
 @media (prefers-reduced-motion: no-preference) {
