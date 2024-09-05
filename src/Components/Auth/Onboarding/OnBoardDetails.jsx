@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import Button from "../../Common/Button";
+import Button from "../../Common/Button";
 import Snackbar from "../../Common/snackbar";
 import Icon from "../../Common/Icon";
 import Axios from "axios";
@@ -148,7 +148,7 @@ export default function OnBoardDetails() {
       };
 
 
-      Axios.post(`${process.env.REACT_APP_BASEURL}tenant/onboard-tenant`, formData)
+      Axios.post(`${process.env.REACT_APP_BASEURL}/tenant/onboard-tenant`, formData)
         .then((response) => {
           console.log("Form submitted successfully!", response.data);
           setSnackbar({
@@ -345,7 +345,7 @@ export default function OnBoardDetails() {
               </div>
             </div>
             <div className="flex justify-center mt-4">
-              {/* <Button label="Submit" /> */}
+              <Button label="Submit" />
             </div>
           </form>
         </div>

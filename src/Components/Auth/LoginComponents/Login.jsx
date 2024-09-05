@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import logo from "../../../assets/logo.png";
 import { motion } from "framer-motion";
-// import Button from "../../Common/Button";
+import Button from "../../Common/Button";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -39,7 +39,8 @@ export default function Login() {
 
       Axios.post(`${process.env.REACT_APP_BASEURL}/user/login`, formData)
         .then((response) => {
-          console.log("Logged in Succesfully!", response.data);
+          console.log("Logged in Succesfully!", response.data.data.userLoginToken);
+          sessionStorage.setItem('token', response.data.data.userLoginToken);
           setSnackbar({
             isVisible: true,
             message: "Logged in Succesfully!",
@@ -164,7 +165,7 @@ export default function Login() {
                 Forgot your password?
               </a>
             </div>
-            {/* <Button label="Login" /> */}
+            <Button label="Login" />
 
             <div className="text-center">
               <p className="text-sm">
