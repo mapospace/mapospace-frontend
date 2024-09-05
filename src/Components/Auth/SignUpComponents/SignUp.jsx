@@ -242,7 +242,7 @@ export default function SignUp() {
 
             <h1 className="text-sm ">Already have a account ?
               <span>
-                <Link to="/" className="text-blue-600 font-semibold" prefetch={false}>
+                <Link to="/mapospace-frontend" className="text-blue-600 font-semibold" prefetch={false}>
                   {" "}
                   Login
                 </Link>

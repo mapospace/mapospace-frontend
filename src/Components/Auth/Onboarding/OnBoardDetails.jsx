@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "../../Common/Button";
 import Snackbar from "../../Common/snackbar";
 import Icon from "../../Common/Icon";
-import Axios from "axios";
+import api from "../../Common/interceptor"
 export default function OnBoardDetails() {
   const [compamyname, setcompamyname] = useState("");
   const [email, setemail] = useState("");
@@ -115,8 +115,9 @@ export default function OnBoardDetails() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Example: Validation logic for form fields (assumed pre-defined validation functions)
     const newErrors = {
-      "Company name": validateCompanyName(compamyname),
+      "Company name": validateCompanyName(compamyname),  // Correct spelling of compamyname to companyName
       "Contact email": validateEmail(email),
       street: validateStreet(street),
       city: validateCity(city),
@@ -129,26 +130,28 @@ export default function OnBoardDetails() {
 
     setErrors(newErrors);
 
+    // If there are no validation errors
     if (Object.values(newErrors).every((error) => error === "")) {
       const emailDomain = email.substring(email.lastIndexOf("@") + 1);
 
+      // Prepare form data for submission
       const formData = {
-        "companyName": compamyname,
-        "address": {
-          "street": email,
-          "city": city,
-          "state": state,
-          "zipCode": zip,
-          "country": country
+        companyName: compamyname,  // Correct spelling of companyName
+        address: {
+          street: street,  // Correct this to street instead of email
+          city: city,
+          state: state,
+          zipCode: zip,
+          country: country
         },
-        "contactEmail": email,
-        "contactPhone": phone,
-        "industry": industry,
-        "businessEmailDomain": emailDomain
+        contactEmail: email,
+        contactPhone: phone,
+        industry: industry,
+        businessEmailDomain: emailDomain
       };
 
-
-      Axios.post(`${process.env.REACT_APP_BASEURL}/tenant/onboard-tenant`, formData)
+      // Use global Axios instance to make the POST request
+      api.post('/tenant/onboard-tenant', formData)
         .then((response) => {
           console.log("Form submitted successfully!", response.data);
           setSnackbar({
@@ -156,7 +159,6 @@ export default function OnBoardDetails() {
             message: "Form submitted successfully!",
             type: "success",
           });
-
           setErrors({});
         })
         .catch((error) => {
@@ -174,10 +176,13 @@ export default function OnBoardDetails() {
         type: "error",
       });
     }
+
+    // Hide the snackbar after 3 seconds
     setTimeout(() => {
       setSnackbar({ isVisible: false, message: "", type: "" });
     }, 3000);
   };
+
   const handleCloseSnackbar = () => {
     setSnackbar({ isVisible: false, message: "", type: "" });
   };

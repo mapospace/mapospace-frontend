@@ -26,55 +26,63 @@ export default function Login() {
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
   };
-  const { login } = useAuth();
-  const navigate = useNavigate();
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (email) {
-      const formData = {
-        businessEmail: email,
-        password: password,
-      };
+    if (email && password) {
+        const formData = {
+            businessEmail: email,
+            password: password,
+        };
 
-      Axios.post(`${process.env.REACT_APP_BASEURL}/user/login`, formData)
-        .then((response) => {
-          console.log("Logged in Succesfully!", response.data.data.userLoginToken);
-          sessionStorage.setItem('token', response.data.data.userLoginToken);
-          setSnackbar({
-            isVisible: true,
-            message: "Logged in Succesfully!",
-            type: "success",
-          });
-          login();
-          if (response.tenantExists) {
-            navigate("/dashboard");
-          }
-          else {
-            navigate("/onboard");
-          }
+        Axios.post(`${process.env.REACT_APP_BASEURL}/user/login`, formData)
+            .then((response) => {
+                const token = response.data.data.userLoginToken;
+                console.log("Logged in Successfully!", token);
+                
+                // Save the token and update authentication state
+                sessionStorage.setItem('token', token);
+                login(token); // Pass token to login function
 
-        })
-        .catch((error) => {
-          console.error("Error submitting form:", error);
-          setSnackbar({
-            isVisible: true,
-            message: "Invalid credentials",
-            type: "error",
-          });
-        });
+                setSnackbar({
+                    isVisible: true,
+                    message: "Logged in Successfully!",
+                    type: "success",
+                });
+
+                console.log("API Response:", response); // Log the entire response to check the structure
+                console.log("Tenant Exists:", response.data.data.tenantExists); // Log tenantExists to verify its value
+
+                if (response.data.data.tenantExists) {
+                    navigate("/dashboard");
+                } else {
+                    navigate("/onboard");
+                }
+            })
+            .catch((error) => {
+                console.error("Error submitting form:", error);
+                setSnackbar({
+                    isVisible: true,
+                    message: "Invalid credentials",
+                    type: "error",
+                });
+            });
+
+        setTimeout(() => {
+            setSnackbar({ isVisible: false, message: "", type: "" });
+        }, 3000);
     } else {
-      setSnackbar({
-        isVisible: true,
-        message: "Invalid credentials",
-        type: "error",
-      });
+        setSnackbar({
+            isVisible: true,
+            message: "Please enter both email and password",
+            type: "error",
+        });
     }
+};
 
-    setTimeout(() => {
-      setSnackbar({ isVisible: false, message: "", type: "" });
-    }, 3000);
-  };
+const { login } = useAuth(); // Access login function from AuthProvider
+const navigate = useNavigate(); // Access navigate function from react-router-dom
 
   const handleCloseSnackbar = () => {
     setSnackbar({ isVisible: false, message: "", type: "" });
