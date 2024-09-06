@@ -31,58 +31,58 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (email && password) {
-        const formData = {
-            businessEmail: email,
-            password: password,
-        };
+      const formData = {
+        businessEmail: email,
+        password: password,
+      };
 
-        Axios.post(`${process.env.REACT_APP_BASEURL}/user/login`, formData)
-            .then((response) => {
-                const token = response.data.data.userLoginToken;
-                console.log("Logged in Successfully!", token);
-                
-                // Save the token and update authentication state
-                sessionStorage.setItem('token', token);
-                login(token); // Pass token to login function
+      Axios.post(`${process.env.REACT_APP_BASEURL}/user/login`, formData)
+        .then((response) => {
+          const token = response.data.data.userLoginToken;
+          console.log("Logged in Successfully!", token);
 
-                setSnackbar({
-                    isVisible: true,
-                    message: "Logged in Successfully!",
-                    type: "success",
-                });
+          // Save the token and update authentication state
+          sessionStorage.setItem('token', token);
+          login(token); // Pass token to login function
 
-                console.log("API Response:", response); // Log the entire response to check the structure
-                console.log("Tenant Exists:", response.data.data.tenantExists); // Log tenantExists to verify its value
-
-                if (response.data.data.tenantExists) {
-                    navigate("/dashboard");
-                } else {
-                    navigate("/onboard");
-                }
-            })
-            .catch((error) => {
-                console.error("Error submitting form:", error);
-                setSnackbar({
-                    isVisible: true,
-                    message: "Invalid credentials",
-                    type: "error",
-                });
-            });
-
-        setTimeout(() => {
-            setSnackbar({ isVisible: false, message: "", type: "" });
-        }, 3000);
-    } else {
-        setSnackbar({
+          setSnackbar({
             isVisible: true,
-            message: "Please enter both email and password",
-            type: "error",
-        });
-    }
-};
+            message: "Logged in Successfully!",
+            type: "success",
+          });
 
-const { login } = useAuth(); // Access login function from AuthProvider
-const navigate = useNavigate(); // Access navigate function from react-router-dom
+          console.log("API Response:", response); // Log the entire response to check the structure
+          console.log("Tenant Exists:", response.data.data.tenantExists); // Log tenantExists to verify its value
+
+          if (response.data.data.tenantExists) {
+            navigate("/mapospace-frontend/dashboard");
+          } else {
+            navigate("/mapospace-frontend/onboard");
+          }
+        })
+        .catch((error) => {
+          console.error("Error submitting form:", error);
+          setSnackbar({
+            isVisible: true,
+            message: "Invalid credentials",
+            type: "error",
+          });
+        });
+
+      setTimeout(() => {
+        setSnackbar({ isVisible: false, message: "", type: "" });
+      }, 3000);
+    } else {
+      setSnackbar({
+        isVisible: true,
+        message: "Please enter both email and password",
+        type: "error",
+      });
+    }
+  };
+
+  const { login } = useAuth(); // Access login function from AuthProvider
+  const navigate = useNavigate(); // Access navigate function from react-router-dom
 
   const handleCloseSnackbar = () => {
     setSnackbar({ isVisible: false, message: "", type: "" });
@@ -165,7 +165,7 @@ const navigate = useNavigate(); // Access navigate function from react-router-do
                 </label>
               </div>
               <a
-                href="/forgotpassword"
+                href="/mapospace-frontend/forgotpassword"
                 className="text-sm text-blue-600 font-semibold"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -178,7 +178,7 @@ const navigate = useNavigate(); // Access navigate function from react-router-do
             <div className="text-center">
               <p className="text-sm">
                 Don't have an account?
-                <Link to="/signup" className="text-blue-600 font-semibold px-1" prefetch={false}>
+                <Link to="/mapospace-frontend/signup" className="text-blue-600 font-semibold px-1" prefetch={false}>
                   Sign up
                 </Link>
               </p>

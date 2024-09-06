@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function Component() {
+export default function Dashoard() {
 
-    return(
-     <h1 className="text-center">WELCOME TO DASHBOARD</h1>
+    return (
+        <h1 className="text-center">WELCOME TO DASHBOARD</h1>
     )
 }
