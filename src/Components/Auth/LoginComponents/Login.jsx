@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { EyeSlashIcon } from "@heroicons/react/24/outline";
 import Snackbar from "../../Common/snackbar";
@@ -9,8 +9,11 @@ import Axios from "axios";
 import logo from "../../../assets/logo.png";
 import { motion } from "framer-motion";
 import Button from "../../Common/Button";
+import LoadingBar from 'react-top-loading-bar'
 
 export default function Login() {
+  const [visible, setVisible] = useState(true);
+  const ref = useRef(null)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -29,6 +32,7 @@ export default function Login() {
 
 
   const handleSubmit = (event) => {
+    ref.current.staticStart()
     event.preventDefault();
     if (email && password) {
       const formData = {
@@ -54,6 +58,7 @@ export default function Login() {
           console.log("API Response:", response); // Log the entire response to check the structure
           console.log("Tenant Exists:", response.data.data.tenantExists); // Log tenantExists to verify its value
 
+          ref.current.complete()
           if (response.data.data.tenantExists) {
             navigate("/mapospace-frontend/dashboard");
           } else {
@@ -61,6 +66,8 @@ export default function Login() {
           }
         })
         .catch((error) => {
+          ref.current.complete(); // Optionally complete the loading before hiding
+          setVisible(false);
           console.error("Error submitting form:", error);
           setSnackbar({
             isVisible: true,
@@ -70,9 +77,11 @@ export default function Login() {
         });
 
       setTimeout(() => {
+        setVisible(false);
         setSnackbar({ isVisible: false, message: "", type: "" });
       }, 3000);
     } else {
+      setVisible(false);
       setSnackbar({
         isVisible: true,
         message: "Please enter both email and password",
@@ -90,6 +99,7 @@ export default function Login() {
 
   return (
     <div className="flex items-center justify-center font-poppins ">
+      {visible && <LoadingBar color='#7e22ce' height={5} ref={ref} />}
       <motion.div className="flex flex-col items-center justify-center py-3 px-9 bg-white shadow-2xl rounded-md border-1 border-t-2"
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}

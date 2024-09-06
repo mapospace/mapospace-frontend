@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 // import Button from "../../Common/Button";
 import { validateForm } from "../../Common/validator";
 import Snackbar from "../../Common/snackbar";
@@ -7,8 +7,11 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import LoadingBar from 'react-top-loading-bar'
 
 export default function SignUp() {
+  const [visible, setVisible] = useState(true);
+  const ref = useRef(null)
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
@@ -27,6 +30,7 @@ export default function SignUp() {
   };
 
   const handleSubmit = (event) => {
+    ref.current.staticStart()
     event.preventDefault();
     const newErrors = validateForm(
       fname,
@@ -57,7 +61,7 @@ export default function SignUp() {
         })
         .catch((error) => {
           console.error("Error submitting form:", error);
-
+          setVisible(false);
           if (error.response) {
             // Extract the error message from the response
             const errorMessage = error.response.data.message || "Error submitting form. Please try again later.";
@@ -68,6 +72,7 @@ export default function SignUp() {
               type: "error",
             });
           } else {
+            setVisible(false);
             // Handle cases where there is no response from the server (e.g., network error)
             setSnackbar({
               isVisible: true,
@@ -96,6 +101,7 @@ export default function SignUp() {
 
   return (
     <div className="flex items-center justify-center font-poppins ">
+      {visible && <LoadingBar color='#7e22ce' height={5} ref={ref} />}
       <motion.div className="flex flex-col items-center justify-center px-6 pt-2 pb-4 border-1 border-t-2 bg-white shadow-xl rounded-md" style={{ width: '550px' }}
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
