@@ -40,7 +40,7 @@ export default function ForgotPassword() {
 
       Axios.post(`${process.env.REACT_APP_BASEURL}/user/forget-password`, formData)
         .then((response) => {
-          const { message, success } = response.data;
+          const { success } = response.data;
           setSnackbar({
             isVisible: true,
             message: response.data.message || (success ? "Password reset email sent successfully!" : "Form submission failed."),

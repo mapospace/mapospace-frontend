@@ -2,7 +2,7 @@
   "name": "mapotech",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mapospace.github.io",
+  "homepage": "https://mapospace.github.io/mapospace-frontend",
   "dependencies": {
     "@heroicons/react": "^2.1.5",
     "@reduxjs/toolkit": "^2.2.7",
