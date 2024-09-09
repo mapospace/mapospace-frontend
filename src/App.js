@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route, useLocation, Outlet } from 'react-router-dom';
 import Footer from './Components/Common/Footer';
 import SignUp from './Components/Auth/SignUpComponents/SignUp';
-import Varification from './Components/Auth/Forgotpassword/VerifyEmail';
+import Varification from './Components/Auth/ForgotPassword/VerifyEmail';
 import Dashboard from './Components/Dashboard/Dashboard';
 import { AuthProvider } from './Components/Auth/auth';
 import GuardedRoute from './Components/Auth/routeguard';
