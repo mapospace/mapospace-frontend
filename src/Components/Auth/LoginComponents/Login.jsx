@@ -8,8 +8,8 @@ import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import logo from "../../../assets/logo.png";
 import { motion } from "framer-motion";
-import Button from "../../Common/Button";
 import LoadingBar from 'react-top-loading-bar'
+import Button from "../../Common/Button";
 
 export default function Login() {
   const [visible, setVisible] = useState(true);
@@ -36,32 +36,32 @@ export default function Login() {
     if (ref.current) {
       ref.current.staticStart(); // Start the loading bar
     }
-    
+
     if (email && password) {
       const formData = {
         businessEmail: email,
         password: password,
       };
-  
+
       Axios.post(`${process.env.REACT_APP_BASEURL}/user/login`, formData)
         .then((response) => {
           const token = response.data.data.userLoginToken;
           console.log("Logged in Successfully!", token);
-  
+
           // Save the token and update authentication state
           sessionStorage.setItem('token', token);
           login(token); // Pass token to login function
-  
+
           setSnackbar({
             isVisible: true,
             message: "Logged in Successfully!",
             type: "success",
           });
-  
+
           if (ref.current) {
             ref.current.complete(); // Complete the loading bar
           }
-  
+
           if (response.data.data.tenantExists) {
             navigate("/mapospace-frontend/dashboard");
           } else {
@@ -80,7 +80,7 @@ export default function Login() {
             type: "error",
           });
         });
-  
+
       setTimeout(() => {
         setVisible(false);
         setSnackbar({ isVisible: false, message: "", type: "" });
@@ -94,7 +94,7 @@ export default function Login() {
       });
     }
   };
-  
+
 
   const { login } = useAuth(); // Access login function from AuthProvider
   const navigate = useNavigate(); // Access navigate function from react-router-dom
