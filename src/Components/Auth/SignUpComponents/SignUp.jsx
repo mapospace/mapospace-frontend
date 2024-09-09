@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-// import Button from "../../Common/Button";
 import { validateForm } from "../../Common/validator";
 import Snackbar from "../../Common/snackbar";
 import logo from "../../../assets/logo.png";
@@ -8,6 +7,7 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import LoadingBar from 'react-top-loading-bar'
+import Button from "../../Common/ButtonComponent";
 
 export default function SignUp() {
   const [visible, setVisible] = useState(true);
@@ -227,7 +227,7 @@ export default function SignUp() {
               )}
             </div>
             <div className="flex justify-center mt-4">
-              {/* <Button label="Sign up" /> */}
+              <Button label="Sign up" />
             </div>
           </form>
           <div className="relative my-4">
