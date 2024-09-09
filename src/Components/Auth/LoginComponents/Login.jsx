@@ -9,7 +9,7 @@ import Axios from "axios";
 import logo from "../../../assets/logo.png";
 import { motion } from "framer-motion";
 import LoadingBar from 'react-top-loading-bar'
-import Button from "../../Common/Button";
+import Button from "../../Common/ButtonComponent";
 
 export default function Login() {
   const [visible, setVisible] = useState(true);
