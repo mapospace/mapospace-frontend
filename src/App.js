@@ -9,7 +9,7 @@ import OnBoardDetails from './Components/Auth/Onboarding/OnBoardDetails';
 import Login from './Components/Auth/LoginComponents/Login';
 import ForgotPassword from './Components/Auth/ForgotPassword/ForgotPassword';
 import ResetPassword from './Components/Auth/ResetPassword/Resetpassword';
-import VerifyEmail from './Components/Auth/Forgotpassword/VerifyEmail'
+import VerifyEmail from './Components/Auth/ForgotPassword/VerifyEmail'
 import LayoutRouter from './Components/Layout/Router'; // Import your LayoutRouter
 
 function AppContent() {
