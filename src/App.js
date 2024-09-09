@@ -15,8 +15,9 @@ import LayoutRouter from './Components/Layout/Router'; // Import your LayoutRout
 function AppContent() {
   const location = useLocation();
 
-  // Define routes for conditions
+  // Define conditions for hiding the footer
   const isForgotPassword = location.pathname === '/mapospace-frontend/forgotpassword';
+  const isLayoutRoute = location.pathname.startsWith('/mapospace-frontend/dashboard'); // Adjust according to LayoutRouter path
 
   return (
     <div className="App flex flex-col min-h-screen">
@@ -36,7 +37,8 @@ function AppContent() {
           </Route>
         </Routes>
       </div>
-      {!isForgotPassword && <Footer />}
+      {/* Hide footer when LayoutRouter or ForgotPassword routes are active */}
+      {!isForgotPassword && !isLayoutRoute && <Footer />}
     </div>
   );
 }
