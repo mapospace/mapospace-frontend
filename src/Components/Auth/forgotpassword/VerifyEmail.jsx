@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import Snackbar from "../../Common/snackbar";
 import Axios from "axios";
 import Icon from "../../Common/Icon";
+
 export default function VerifyEmail() {
   const [timer, setTimer] = useState(180);
   const location = useLocation();
