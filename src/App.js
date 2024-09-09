@@ -7,9 +7,9 @@ import { AuthProvider } from './Components/Auth/auth';
 import GuardedRoute from './Components/Auth/routeguard';
 import OnBoardDetails from './Components/Auth/Onboarding/OnBoardDetails';
 import Login from './Components/Auth/LoginComponents/Login';
-import ForgotPassword from './Components/Auth/ForgotPassword/ForgotPassword';
+import ForgotPassword from './Components/Auth/ForgotPasswordComponent/ForgotPassword';
 import ResetPassword from './Components/Auth/ResetPassword/Resetpassword';
-import VerifyEmail from './Components/Auth/ForgotPassword/VerifyEmail'
+import VerifyEmail from './Components/Auth/ForgotPasswordComponent/VerifyEmail'
 import LayoutRouter from './Components/Layout/Router'; // Import your LayoutRouter
 
 function AppContent() {
