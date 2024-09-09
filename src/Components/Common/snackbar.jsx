@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const Snackbar = ({ message, type, isVisible, onClose }) => {
+  // Auto-close the Snackbar after 3 seconds when it becomes visible
+  useEffect(() => {
+    if (isVisible) {
+      const timer = setTimeout(() => {
+        onClose();
+      }, 3000); // 3000 milliseconds = 3 seconds
+
+      // Cleanup the timer if the component unmounts or visibility changes
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible, onClose]);
+
   if (!isVisible) return null;
 
   const getBackgroundColor = (type) => {
@@ -22,6 +34,7 @@ const Snackbar = ({ message, type, isVisible, onClose }) => {
   return (
     <div
       className={`fixed top-5 right-5 p-4 rounded shadow-lg text-white transition-opacity duration-300 ${getBackgroundColor(type)}`}
+      style={{ zIndex: 999 }} // Set z-index to 999
       role="alert"
     >
       <div className="flex items-center justify-between">

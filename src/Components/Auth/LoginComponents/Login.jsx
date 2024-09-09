@@ -32,33 +32,36 @@ export default function Login() {
 
 
   const handleSubmit = (event) => {
-    ref.current.staticStart()
     event.preventDefault();
+    if (ref.current) {
+      ref.current.staticStart(); // Start the loading bar
+    }
+    
     if (email && password) {
       const formData = {
         businessEmail: email,
         password: password,
       };
-
+  
       Axios.post(`${process.env.REACT_APP_BASEURL}/user/login`, formData)
         .then((response) => {
           const token = response.data.data.userLoginToken;
           console.log("Logged in Successfully!", token);
-
+  
           // Save the token and update authentication state
           sessionStorage.setItem('token', token);
           login(token); // Pass token to login function
-
+  
           setSnackbar({
             isVisible: true,
             message: "Logged in Successfully!",
             type: "success",
           });
-
-          console.log("API Response:", response); // Log the entire response to check the structure
-          console.log("Tenant Exists:", response.data.data.tenantExists); // Log tenantExists to verify its value
-
-          ref.current.complete()
+  
+          if (ref.current) {
+            ref.current.complete(); // Complete the loading bar
+          }
+  
           if (response.data.data.tenantExists) {
             navigate("/mapospace-frontend/dashboard");
           } else {
@@ -66,7 +69,9 @@ export default function Login() {
           }
         })
         .catch((error) => {
-          ref.current.complete(); // Optionally complete the loading before hiding
+          if (ref.current) {
+            ref.current.complete(); // Complete the loading bar even on error
+          }
           setVisible(false);
           console.error("Error submitting form:", error);
           setSnackbar({
@@ -75,7 +80,7 @@ export default function Login() {
             type: "error",
           });
         });
-
+  
       setTimeout(() => {
         setVisible(false);
         setSnackbar({ isVisible: false, message: "", type: "" });
@@ -89,6 +94,7 @@ export default function Login() {
       });
     }
   };
+  
 
   const { login } = useAuth(); // Access login function from AuthProvider
   const navigate = useNavigate(); // Access navigate function from react-router-dom

@@ -5,7 +5,7 @@ import { useAuth } from './auth';
 const GuardedRoute = ({ element: Component }) => {
     const { isAuthenticated } = useAuth();
 
-    return isAuthenticated ? Component : <Navigate to="/Login" />;
+    return isAuthenticated ? Component : <Navigate to="/mapospace-frontend" />;
 };
 
 export default GuardedRoute;

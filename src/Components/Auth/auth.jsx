@@ -4,13 +4,13 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(() => {
-        // Initialize state from sessionStorage
+        // Initialize state from sessionStorageeeeeee
         const token = sessionStorage.getItem('token');
         return token ? true : false;
     });
 
     useEffect(() => {
-        // Update sessionStorage whenever isAuthenticated state changes
+        // Update sessionStorage whenever isAuthenticated state changessssss
         if (!isAuthenticated) {
             sessionStorage.removeItem('token');
         }

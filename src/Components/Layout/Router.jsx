@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './Layout'; 
-import Dashboard from '../Dashboard/dashoard';
+import Dashboard from '../Dashboard/Dashboard';
 import GuardedRoute from '../Auth/routeguard'; 
 import Userlist from '../Dashboard/UserManagement/UserList';
 
@@ -10,13 +10,13 @@ const LayoutRouter = () => {
         <Layout>
             <Routes>
                 <Route
-                    path="/dashboard"
+                    path="dashboard"
                     element={
                         <GuardedRoute element={<Dashboard />} />
                     }
                 />
-                 <Route
-                    path="/user-list"
+                <Route
+                    path="user-list"
                     element={
                         <GuardedRoute element={<Userlist />} />
                     }

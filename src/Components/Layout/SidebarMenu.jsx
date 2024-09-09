@@ -7,34 +7,41 @@ const menuData = [
   {
     title: 'Dashboard',
     icon: 'LockClosedIcon', 
-    path: '/dashboard',
+    path: '/mapospace-frontend/dashboard',
   },
-  {
-    title: 'User List',
-    icon: 'LockClosedIcon', 
-    path: '/user-list',
-  },
+  // {
+  //   title: 'User List',
+  //   icon: 'LockClosedIcon', 
+  //   path: '/mapospace-frontend/user-list',
+  // },
 
-//   {
-//     title: 'User Management',
-//     icon: 'UserIcon',
-//     path: '/user-management',
-//   },
-//   {
-//     title: 'User Groups',
-//     icon: 'UserGroupIcon',
-//     path: '/user-groups',
-//     subItems: [
-//       {
-//         title: 'Admins',
-//         path: '/user-groups/admins',
-//       },
-//       {
-//         title: 'Editors',
-//         path: '/user-groups/editors',
-//       },
-//     ],
-//   },
+  {
+    title: 'User Management',
+    icon: 'UserIcon',
+    path: '/user-management',
+    subItems: [
+      {
+        title: 'User List',
+       
+        path: '/mapospace-frontend/user-list',
+      },
+    ],
+  },
+  // {
+  //   title: 'User Groups',
+  //   icon: 'UserGroupIcon',
+  //   path: '/user-groups',
+  //   subItems: [
+  //     {
+  //       title: 'Admins',
+  //       path: '/user-groups/admins',
+  //     },
+  //     {
+  //       title: 'Editors',
+  //       path: '/user-groups/editors',
+  //     },
+  //   ],
+  // },
 ];
 
 export default function SidebarMenu() {
