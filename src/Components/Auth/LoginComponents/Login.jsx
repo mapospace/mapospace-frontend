@@ -46,10 +46,12 @@ export default function Login() {
       Axios.post(`${process.env.REACT_APP_BASEURL}/user/login`, formData)
         .then((response) => {
           const token = response.data.data.userLoginToken;
+         const refreshToken=response.data.data.refreshToken;
           console.log("Logged in Successfully!", token);
   
           // Save the token and update authentication state
           sessionStorage.setItem('token', token);
+          sessionStorage.setItem('refreshToken', refreshToken);
           login(token); // Pass token to login function
   
           setSnackbar({

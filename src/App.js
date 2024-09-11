@@ -38,7 +38,7 @@ function AppContent() {
         </Routes>
       </div>
       {/* Hide footer when LayoutRouter or ForgotPassword routes are active */}
-      {!isForgotPassword && !isLayoutRoute && <Footer />}
+      {!isForgotPassword || !isLayoutRoute && <Footer />}
     </div>
   );
 }
