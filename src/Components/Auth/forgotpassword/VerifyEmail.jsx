@@ -71,7 +71,7 @@ export default function VerifyEmail() {
   };
 
   return (
-    <div className="flex items-center justify-center mt-5 font-poppins ">
+    <div className="flex items-center justify-center mt-5 font-poppins mt-12 ">
       <div className="flex flex-col items-center justify-center p-6 bg-red shadow-md rounded-md border-1 border-t-2">
         <Icon mb="20px" width="50px" height="50px" />
         <div className="flex flex-col items-center space-y-1 mb-4 ">

@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
-// import Button from "../../Common/Button";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import Button from "../../Common/Button";
 import { validateForm } from "../../Common/validator";
 import Snackbar from "../../Common/snackbar";
 import logo from "../../../assets/logo.png";
@@ -7,11 +8,11 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
-import LoadingBar from 'react-top-loading-bar'
+import LoadingBar from 'react-top-loading-bar';
 
 export default function SignUp() {
   const [visible, setVisible] = useState(true);
-  const ref = useRef(null)
+  const ref = useRef(null);
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
@@ -24,14 +25,17 @@ export default function SignUp() {
     message: "",
     type: "",
   });
+  
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleTogglePassword = () => {
     setConfirmPassword(!confirmPassword);
   };
 
   const handleSubmit = (event) => {
-    ref.current.staticStart()
+    ref.current.staticStart();
     event.preventDefault();
+    
     const newErrors = validateForm(
       fname,
       lname,
@@ -58,22 +62,22 @@ export default function SignUp() {
             type: "success",
           });
           setErrors({});
+
+          // Navigate to the VerifyEmail page with email in state
+          navigate("/mapospace-frontend/verify-email", { state: { email } });
+          
         })
         .catch((error) => {
           console.error("Error submitting form:", error);
           setVisible(false);
           if (error.response) {
-            // Extract the error message from the response
             const errorMessage = error.response.data.message || "Error submitting form. Please try again later.";
-
             setSnackbar({
               isVisible: true,
               message: errorMessage,
               type: "error",
             });
           } else {
-            setVisible(false);
-            // Handle cases where there is no response from the server (e.g., network error)
             setSnackbar({
               isVisible: true,
               message: "Network error. Please check your connection and try again.",
@@ -82,11 +86,6 @@ export default function SignUp() {
           }
         });
     } else {
-      // setSnackbar({
-      //   isVisible: true,
-      //   message: "Please fix the errors in the form.",
-      //   type: "error",
-      // });
       setErrors(newErrors);
     }
 
@@ -100,7 +99,7 @@ export default function SignUp() {
   };
 
   return (
-    <div className="flex items-center justify-center font-poppins ">
+    <div className="flex items-center justify-center font-poppins mt-1">
       {visible && <LoadingBar color='#7e22ce' height={5} ref={ref} />}
       <motion.div className="flex flex-col items-center justify-center px-6 pt-2 pb-4 border-1 border-t-2 bg-white shadow-xl rounded-md" style={{ width: '550px' }}
         initial={{ opacity: 0, scale: 0.5 }}
@@ -110,7 +109,7 @@ export default function SignUp() {
           delay: 0.2,
           ease: [0, 0.71, 0.2, 1.01]
         }}>
-        <div className="flex flex-col items-center space-y-4 " >
+        <div className="flex flex-col items-center space-y-4">
           <img src={logo} alt="Logo" className="w-[60px] h-[60px]" />
           <h1 className="text-xl font-bold">Create Your Account</h1>
         </div>
@@ -196,7 +195,7 @@ export default function SignUp() {
                 htmlFor="passwordAgain"
                 className="block text-sm font-medium text-black-700"
               >
-                Confirm password
+                Confirm Password
               </label>
               <div className="mt-1 relative">
                 <input
@@ -227,35 +226,20 @@ export default function SignUp() {
               )}
             </div>
             <div className="flex justify-center mt-4">
-              {/* <Button label="Sign up" /> */}
+              <Button label="Sign up" />
             </div>
           </form>
-          <div className="relative my-4">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-muted-foreground" />
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="bg-white px-2 text-muted-foreground">
-                Or continue with
-              </span>
-            </div>
-          </div>
-          <button className="w-full flex items-center justify-center border border-gray-300 text-gray-700 bg-transparent hover:bg-purple-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-purple-200 py-2 px-4 rounded transition-colors">
-            <ChromeIcon className="w-5 h-5 mr-2" />
-            Sign up with google
-          </button>
-          <div className="flex justify-center align-middle">
-
-            <h1 className="text-sm ">Already have a account ?
-              <span>
-                <Link to="/mapospace-frontend" className="text-blue-600 font-semibold" prefetch={false}>
-                  {" "}
-                  Login
-                </Link>
-              </span></h1>
+          <div className="flex justify-center items-center mt-1">
+            <p className="text-sm text-gray-600">
+              Already have an account?{" "}
+              <Link to="/" className="text-purple-700">
+                Login
+              </Link>
+            </p>
           </div>
         </div>
       </motion.div>
+
       <Snackbar
         message={snackbar.message}
         type={snackbar.type}
@@ -263,28 +247,5 @@ export default function SignUp() {
         onClose={handleCloseSnackbar}
       />
     </div>
-  );
-}
-
-function ChromeIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="12" cy="12" r="10" />
-      <circle cx="12" cy="12" r="4" />
-      <line x1="21.17" x2="12" y1="8" y2="8" />
-      <line x1="3.95" x2="8.54" y1="6.06" y2="14" />
-      <line x1="10.88" x2="15.46" y1="21.94" y2="14" />
-    </svg>
   );
 }

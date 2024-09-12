@@ -63,8 +63,10 @@ export default function Login() {
           if (ref.current) {
             ref.current.complete(); // Complete the loading bar
           }
-  
-          if (response.data.data.tenantExists) {
+          if(!response.data.data.ifVerified){
+            navigate("/mapospace-frontend/verify-email", { state: { email } });
+          }
+         else if (response.data.data.tenantExists) {
             navigate("/mapospace-frontend/dashboard");
           } else {
             navigate("/mapospace-frontend/onboard");
@@ -106,7 +108,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center font-poppins ">
+    <div className="flex items-center justify-center font-poppins  mt-14">
       {visible && <LoadingBar color='#7e22ce' height={5} ref={ref} />}
       <motion.div className="flex flex-col items-center justify-center py-3 px-9 bg-white shadow-2xl rounded-md border-1 border-t-2"
         initial={{ opacity: 0, scale: 0.5 }}
@@ -116,7 +118,7 @@ export default function Login() {
           delay: 0.2,
           ease: [0, 0.71, 0.2, 1.01]
         }}>
-        <div className="flex flex-col items-center space-y-2">
+        <div className="flex flex-col items-center space-y-2 ">
           <img src={logo} alt="Logo" className="w-[60px] h-[60px]" />
           <h1 className="text-2xl font-bold">Welcome to Mapospace</h1>
           <p className="text-muted-foreground">

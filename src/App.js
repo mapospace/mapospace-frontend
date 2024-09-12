@@ -33,12 +33,19 @@ function AppContent() {
             <Route path="onboard" element={<OnBoardDetails />} />
 
             {/* Use LayoutRouter for post-login routes */}
-            <Route path="*" element={<LayoutRouter />} />
+            {/* <Route path="*" element={<LayoutRouter />} /> */}
+            <Route
+                    path="*"
+                    element={
+                        <GuardedRoute element={<LayoutRouter />} />
+                    }
+                />
           </Route>
         </Routes>
       </div>
       {/* Hide footer when LayoutRouter or ForgotPassword routes are active */}
-      {!isForgotPassword || !isLayoutRoute && <Footer />}
+      {(!isForgotPassword ||isLayoutRoute)  || <Footer />}
+      {/* {!isLayoutRoute && <Footer />} */}
     </div>
   );
 }
