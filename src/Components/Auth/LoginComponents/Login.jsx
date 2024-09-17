@@ -42,8 +42,8 @@ export default function Login() {
         businessEmail: email,
         password: password,
       };
-
-      Axios.post(`${process.env.REACT_APP_BASEURL}/user/login`, formData)
+      const baseUrl = process.env.REACT_APP_BASEURL || 'https://develop-dot-mapospacev1.el.r.appspot.com/api/v1';
+      Axios.post(`${baseUrl}/user/login`, formData)
         .then((response) => {
           const token = response.data.data.userLoginToken;
           console.log("Logged in Successfully!", token);

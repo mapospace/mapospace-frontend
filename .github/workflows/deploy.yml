@@ -21,6 +21,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Debug environment variables
+        run: |
+          echo "REACT_APP_BASEURL=${{ secrets.REACT_APP_BASEURL }}"
+
       - name: Build the React app
         env:
           REACT_APP_BASEURL: ${{ secrets.REACT_APP_BASEURL }}
