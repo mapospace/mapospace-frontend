@@ -22,6 +22,8 @@ jobs:
         run: npm install
 
       - name: Build the React app
+        env:
+         REACT_APP_BASEURL: ${{ secrets.REACT_APP_BASEURL }}
         run: |
           CI=false npm run build
 
