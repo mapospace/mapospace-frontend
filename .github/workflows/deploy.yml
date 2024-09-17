@@ -24,8 +24,10 @@ jobs:
       - name: Set environment variables for build
         run: |
           echo "REACT_APP_BASEURL=${{ secrets.REACT_APP_BASEURL }}" >> .env.development
-
+          
       - name: Build the React app
+        env:
+         REACT_APP_BASEURL: ${{ secrets.REACT_APP_BASEURL }}
         run: |
           CI=false npm run build
 
