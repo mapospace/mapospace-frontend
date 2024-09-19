@@ -9,12 +9,15 @@ import ForgotPassword from './Components/Auth/ForgotPasswordComponent/ForgotPass
 import ResetPassword from './Components/Auth/ResetPassword/Resetpassword';
 import VerifyEmail from './Components/Auth/ForgotPasswordComponent/VerifyEmail'
 import LayoutRouter from './Components/Layout/Router'; // Import your LayoutRouter
+import GuardedRoute from './Components/Auth/routeguard';
+import EmailVerified from './Components/Auth/EmailComponent/EmailVerified';
 
 function AppContent() {
   const location = useLocation();
 
-  // Define routes for conditions
+  // Define conditions for hiding the footer
   const isForgotPassword = location.pathname === '/mapospace-frontend/forgotpassword';
+  const isLayoutRoute = location.pathname.startsWith('/mapospace-frontend/dashboard'); // Adjust according to LayoutRouter path
 
   return (
     <div className="App flex flex-col min-h-screen">
@@ -26,14 +29,23 @@ function AppContent() {
             <Route path="signup" element={<SignUp />} />
             <Route path="forgotpassword" element={<ForgotPassword />} />
             <Route path="verify-email" element={<VerifyEmail />} />
-            <Route path="reset-password/:id" element={<ResetPassword />} />
             <Route path="onboard" element={<OnBoardDetails />} />
             {/* Use LayoutRouter for post-login routes */}
-            <Route path="*" element={<LayoutRouter />} />
+            {/* <Route path="*" element={<LayoutRouter />} /> */}
+            <Route
+              path="*"
+              element={
+                <GuardedRoute element={<LayoutRouter />} />
+              }
+            />
           </Route>
+          <Route path="reset-password/:id" element={<ResetPassword />} />
+          <Route path="verify-email/:id" element={<EmailVerified />} />
         </Routes>
       </div>
-      {!isForgotPassword && <Footer />}
+      {/* Hide footer when LayoutRouter or ForgotPassword routes are active */}
+      {(!isForgotPassword || isLayoutRoute) || <Footer />}
+      {/* {!isLayoutRoute && <Footer />} */}
     </div>
   );
 }

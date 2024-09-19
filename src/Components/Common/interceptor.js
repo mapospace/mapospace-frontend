@@ -38,6 +38,7 @@ api.interceptors.response.use(
     const originalRequest = error.config;
 
     if (error.response.status === 401 && !originalRequest._retry) {
+
       if (isRefreshing) {
         // Queue the request until the token refresh is complete
         return new Promise((resolve, reject) => {
@@ -64,11 +65,12 @@ api.interceptors.response.use(
       }
 
       try {
-        const response = await axios.post(`${process.env.REACT_APP_BASEURL}/user/refresh-token-login`, {
+        const baseUrl = process.env.REACT_APP_BASEURL || 'https://develop-dot-mapospacev1.el.r.appspot.com/api/v1';
+        const response = await axios.post(`${baseUrl}/user/refresh-token-login`, {
           refreshToken,
         });
 
-        const newToken = response.data.token;
+        const newToken = response.data.userLoginToken;
         sessionStorage.setItem('token', newToken);
 
         // Retry the original request with the new token

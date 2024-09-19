@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"; // Import useParams
-import Button from "../../Common/ButtonComponent";
+import { useNavigate, useParams } from "react-router-dom"; // Import useParams
 import Snackbar from "../../Common/snackbar";
 import Axios from "axios";
 import Icon from "../../Common/Icon";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import Button from "../../Common/Button";
 
 export default function ResetPassword() {
-  const { id } = useParams(); // Extract the id from the route
+  const navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [passwordAgain, setPasswordAgain] = useState("");
   const [errors, setErrors] = useState({});
@@ -18,10 +18,11 @@ export default function ResetPassword() {
     message: "",
     type: "",
   });
+  const { id: token } = useParams();  // Extract the id from the route
 
-  useEffect(() => {
+  // useEffect(() => {
 
-  }, [id]);
+  // }, [id]);
 
   const validateForm = (password, passwordAgain) => {
     const newErrors = {};
@@ -76,18 +77,14 @@ export default function ResetPassword() {
 
     if (Object.keys(newErrors).length === 0) {
       const formData = {
-        password: password,
-        passwordAgain: passwordAgain,
+        newPassword: password,
+        token: token,
+
       };
 
       Axios.post(
-        `${process.env.REACT_APP_BASEURL}/user/reset-password`,
+        `${process.env.REACT_APP_BASEURL}/user/reset-forget-password`,
         formData,
-        {
-          headers: {
-            Authorization: `Bearer ${id}`,
-          },
-        }
       )
         .then((response) => {
           setSnackbar({
@@ -95,6 +92,9 @@ export default function ResetPassword() {
             message: response.data.message || "Password reset successfully!",
             type: "success",
           });
+          setTimeout(() => {
+            navigate("/mapospace-frontend/login"); // Redirect to the login page after 2 minutes
+          }, 2000);
           setErrors({});
         })
         .catch((error) => {

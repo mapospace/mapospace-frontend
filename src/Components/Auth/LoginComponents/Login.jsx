@@ -1,36 +1,72 @@
-import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { EyeSlashIcon } from "@heroicons/react/24/outline";
 import Snackbar from "../../Common/snackbar";
 import { useAuth } from "../auth";
-
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import logo from "../../../assets/logo.png";
 import { motion } from "framer-motion";
-import LoadingBar from 'react-top-loading-bar'
-import Button from "../../Common/ButtonComponent";
+import LoadingBar from 'react-top-loading-bar';
+import Button from "../../Common/Button";
+import Cookies from 'js-cookie';
+import { setCookie, getCookie, removeCookie } from '../../Utils/CookieHelper'
 
 export default function Login() {
   const [visible, setVisible] = useState(true);
-  const ref = useRef(null)
+  const ref = useRef(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [checked, setIsChecked] = useState(false);
+  const [checked, setIsChecked] = useState(false); // Remember Me checkbox
   const [snackbar, setSnackbar] = useState({
     isVisible: false,
     message: "",
     type: "",
   });
+
+  const { login } = useAuth(); // Access login function from AuthProvider
+  const navigate = useNavigate(); // Access navigate function from react-router-dom
+  const location = useLocation(); // Get current location
+
+  // Toggle password visibility
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
+
+  // Handle "Remember Me" checkbox change
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
   };
 
+  // Load email and password from cookies on component mount only when the login URL is hit
+  useEffect(() => {
+    if (location.pathname === "/mapospace-frontend/login") { // Trigger only when login URL is hit
+      const rememberedEmail = getCookie("rememberedEmail");
+      const rememberedPassword = getCookie("rememberedPassword");
 
+      if (rememberedEmail) {
+        setEmail(rememberedEmail);
+        setIsChecked(true); // Automatically check the "Remember Me" box if cookies are set
+      }
+      if (rememberedPassword) {
+        setPassword(rememberedPassword); // Pre-fill password field if saved
+      }
+    }
+  }, [location.pathname]);
+
+  // Save email and password to cookies if "Remember Me" is checked
+  const handleRememberMe = () => {
+    if (checked) {
+      setCookie("rememberedEmail", email); // Save email for 7 days by default
+      setCookie("rememberedPassword", password); // Save password for 7 days by default
+    } else {
+      removeCookie("rememberedEmail"); // Remove email if "Remember Me" is unchecked
+      removeCookie("rememberedPassword"); // Remove password if "Remember Me" is unchecked
+    }
+  };
+
+  // Handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
     if (ref.current) {
@@ -46,11 +82,18 @@ export default function Login() {
       Axios.post(`${baseUrl}/user/login`, formData)
         .then((response) => {
           const token = response.data.data.userLoginToken;
-          console.log("Logged in Successfully!", token);
+          const refreshToken = response.data.data.refreshToken;
 
-          // Save the token and update authentication state
+          // Save token and refreshToken in sessionStorage
           sessionStorage.setItem('token', token);
-          login(token); // Pass token to login function
+          sessionStorage.setItem('refreshToken', refreshToken);
+
+          // Save token and refreshToken in cookies
+          setCookie("token", token); // Save token in cookie
+          setCookie("refreshToken", refreshToken); // Save refresh token in cookie
+
+          // Call login function
+          login(token);
 
           setSnackbar({
             isVisible: true,
@@ -58,11 +101,14 @@ export default function Login() {
             type: "success",
           });
 
+          handleRememberMe(); // Call Remember Me function
+
           if (ref.current) {
             ref.current.complete(); // Complete the loading bar
           }
-
-          if (response.data.data.tenantExists) {
+          if (!response.data.data.ifVerified) {
+            navigate("/mapospace-frontend/verify-email", { state: { email } });
+          } else if (response.data.data.tenantExists) {
             navigate("/mapospace-frontend/dashboard");
           } else {
             navigate("/mapospace-frontend/onboard");
@@ -95,16 +141,12 @@ export default function Login() {
     }
   };
 
-
-  const { login } = useAuth(); // Access login function from AuthProvider
-  const navigate = useNavigate(); // Access navigate function from react-router-dom
-
   const handleCloseSnackbar = () => {
     setSnackbar({ isVisible: false, message: "", type: "" });
   };
 
   return (
-    <div className="flex items-center justify-center font-poppins ">
+    <div className="flex items-center justify-center font-poppins  mt-14">
       {visible && <LoadingBar color='#7e22ce' height={5} ref={ref} />}
       <motion.div className="flex flex-col items-center justify-center py-3 px-9 bg-white shadow-2xl rounded-md border-1 border-t-2"
         initial={{ opacity: 0, scale: 0.5 }}
@@ -114,7 +156,7 @@ export default function Login() {
           delay: 0.2,
           ease: [0, 0.71, 0.2, 1.01]
         }}>
-        <div className="flex flex-col items-center space-y-2">
+        <div className="flex flex-col items-center space-y-2 ">
           <img src={logo} alt="Logo" className="w-[60px] h-[60px]" />
           <h1 className="text-2xl font-bold">Welcome to Mapospace</h1>
           <p className="text-muted-foreground">
@@ -237,6 +279,8 @@ export default function Login() {
     </div >
   );
 }
+
+
 
 function ChromeIcon(props) {
   return (

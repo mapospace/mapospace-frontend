@@ -4,7 +4,7 @@ import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Icon from "../../Common/Icon";
 import { motion } from "framer-motion";
-import Button from "../../Common/ButtonComponent";
+import Button from "../../Common/Button";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -37,8 +37,8 @@ export default function ForgotPassword() {
       const formData = {
         businessEmail: email,
       };
-
-      Axios.post(`${process.env.REACT_APP_BASEURL}/user/forget-password`, formData)
+      const baseUrl = process.env.REACT_APP_BASEURL || 'https://develop-dot-mapospacev1.el.r.appspot.com/api/v1';
+      Axios.post(`${baseUrl}/user/forget-password`, formData)
         .then((response) => {
           const { success } = response.data;
           setSnackbar({
@@ -49,7 +49,7 @@ export default function ForgotPassword() {
 
           setErrors({});
           if (success) {
-            navigate("/verify-email", { state: { email } });
+            navigate("/mapospace-frontend/verify-email", { state: { email } });
           }
         })
         .catch((error) => {

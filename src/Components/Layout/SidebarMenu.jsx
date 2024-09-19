@@ -18,12 +18,24 @@ const menuData = [
   {
     title: 'User Management',
     icon: 'UserIcon',
-    path: '/user-management',
+   
     subItems: [
       {
         title: 'User List',
        
         path: '/mapospace-frontend/user-list',
+      },
+    ],
+  },
+  {
+    title: 'User Group',
+    icon: 'UserGroupIcon', 
+    // path: '/mapospace-frontend/user-group',
+    subItems: [
+      {
+        title: 'Add Group',
+       
+        path: '/mapospace-frontend/user-group',
       },
     ],
   },
