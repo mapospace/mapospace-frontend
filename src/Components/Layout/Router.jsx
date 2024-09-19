@@ -5,6 +5,7 @@ import Dashboard from '../Dashboard/Dashboard';
 import GuardedRoute from '../Auth/routeguard'; 
 import Userlist from '../Dashboard/UserManagement/UserList';
 import AddGroup from '../Dashboard/UserGroup/AddGroup'
+import GroupList from '../Dashboard/UserGroup/GroupList';
 
 const LayoutRouter = () => {
     return (
@@ -23,7 +24,13 @@ const LayoutRouter = () => {
                     }
                 />
                 <Route
-                    path="user-group"
+                    path="user-group-list"
+                    element={
+                        <GuardedRoute element={<GroupList />} />
+                    }
+                />
+                <Route
+                    path="add-Group"
                     element={
                         <GuardedRoute element={<AddGroup />} />
                     }

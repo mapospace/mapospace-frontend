@@ -2,13 +2,13 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route, useLocation, Outlet } from 'react-router-dom';
 import Footer from './Components/Common/Footer';
 import SignUp from './Components/Auth/SignUpComponents/SignUp';
-import Varification from './Components/Auth/forgotpassword/Verifyemail';
+import Varification from './Components/Auth/forgotpassword/VerifyEmail';
 import Dashboard from './Components/Dashboard/Dashboard';
 import { AuthProvider } from './Components/Auth/auth';
 import GuardedRoute from './Components/Auth/routeguard';
 import OnBoardDetails from './Components/Auth/Onboarding/OnBoardDetails';
 import Login from './Components/Auth/LoginComponents/Login';
-import ForgotPassword from './Components/Auth/forgotpassword/ForgotPassword';
+import ForgotPassword from './Components/Auth/forgotpassword/forgotPassword';
 import ResetPassword from './Components/Auth/ResetPassword/Resetpassword';
 import LayoutRouter from './Components/Layout/Router'; // Import your LayoutRouter
 

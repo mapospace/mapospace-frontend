@@ -33,9 +33,9 @@ const menuData = [
     // path: '/mapospace-frontend/user-group',
     subItems: [
       {
-        title: 'Add Group',
+        title: 'User Group List',
        
-        path: '/mapospace-frontend/user-group',
+        path: '/mapospace-frontend/user-group-list',
       },
     ],
   },
