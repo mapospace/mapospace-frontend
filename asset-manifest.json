@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/mapospace-frontend/static/css/main.9d16194f.css",
-    "main.js": "/mapospace-frontend/static/js/main.530172d1.js",
+    "main.css": "/mapospace-frontend/static/css/main.235ef304.css",
+    "main.js": "/mapospace-frontend/static/js/main.62a76bce.js",
     "static/js/453.c93feafb.chunk.js": "/mapospace-frontend/static/js/453.c93feafb.chunk.js",
     "index.html": "/mapospace-frontend/index.html",
-    "main.9d16194f.css.map": "/mapospace-frontend/static/css/main.9d16194f.css.map",
-    "main.530172d1.js.map": "/mapospace-frontend/static/js/main.530172d1.js.map",
+    "main.235ef304.css.map": "/mapospace-frontend/static/css/main.235ef304.css.map",
+    "main.62a76bce.js.map": "/mapospace-frontend/static/js/main.62a76bce.js.map",
     "453.c93feafb.chunk.js.map": "/mapospace-frontend/static/js/453.c93feafb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9d16194f.css",
-    "static/js/main.530172d1.js"
+    "static/css/main.235ef304.css",
+    "static/js/main.62a76bce.js"
   ]
 }
