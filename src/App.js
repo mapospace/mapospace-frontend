@@ -30,8 +30,8 @@ function AppContent() {
             <Route path="forgotpassword" element={<ForgotPassword />} />
             <Route path="verify-email" element={<VerifyEmail />} />
             <Route path="onboard" element={<OnBoardDetails />} />
-            {/* Use LayoutRouter for post-login routes */}
-            {/* <Route path="*" element={<LayoutRouter />} /> */}
+            <Route path="reset-password/:id" element={<ResetPassword />} />
+            <Route path="verify-email/:id" element={<EmailVerified />} />
             <Route
               path="*"
               element={
@@ -39,13 +39,9 @@ function AppContent() {
               }
             />
           </Route>
-          <Route path="reset-password/:id" element={<ResetPassword />} />
-          <Route path="verify-email/:id" element={<EmailVerified />} />
         </Routes>
       </div>
-      {/* Hide footer when LayoutRouter or ForgotPassword routes are active */}
       {(!isForgotPassword || isLayoutRoute) || <Footer />}
-      {/* {!isLayoutRoute && <Footer />} */}
     </div>
   );
 }
