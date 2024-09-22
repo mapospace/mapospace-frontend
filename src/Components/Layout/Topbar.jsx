@@ -39,7 +39,7 @@ export default function Topbar({ toggleSidebar }) {
   }, []);
 
   return (
-    <header className="bg-white p-4 fixed top-0 left-0 right-0 z-20 flex items-center shadow justify-between">
+    <header className="bg-white p-4 fixed  top-0 left-0 right-0 z-20 flex items-center shadow justify-between">
       <button
         onClick={toggleSidebar}
         className="lg:hidden text-white mr-4"

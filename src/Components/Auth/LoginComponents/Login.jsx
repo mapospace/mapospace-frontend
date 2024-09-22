@@ -73,6 +73,7 @@ export default function Login() {
       ref.current.staticStart(); // Start the loading bar
     }
 
+
     if (email && password) {
       const formData = {
         businessEmail: email,
@@ -106,12 +107,15 @@ export default function Login() {
           if (ref.current) {
             ref.current.complete(); // Complete the loading bar
           }
-          if (!response.data.data.ifVerified) {
-            navigate("/mapospace-frontend/verify-email", { state: { email } });
-          } else if (response.data.data.tenantExists) {
-            navigate("/mapospace-frontend/dashboard");
-          } else {
-            navigate("/mapospace-frontend/onboard");
+          console.log("respoooooo", response)
+          if (response.data.data.ifVerified) {
+            if (!response.data.data.ifVerified) {
+              navigate("/mapospace-frontend/verify-email", { state: { email } });
+            } else if (response.data.data.tenantExists) {
+              navigate("/mapospace-frontend/dashboard");
+            } else {
+              navigate("/mapospace-frontend/onboard");
+            }
           }
         })
         .catch((error) => {
@@ -126,6 +130,7 @@ export default function Login() {
             type: "error",
           });
         });
+
 
       setTimeout(() => {
         setVisible(false);

@@ -9,8 +9,8 @@ import ForgotPassword from './Components/Auth/ForgotPasswordComponent/ForgotPass
 import ResetPassword from './Components/Auth/ResetPassword/Resetpassword';
 import VerifyEmail from './Components/Auth/ForgotPasswordComponent/VerifyEmail'
 import LayoutRouter from './Components/Layout/Router'; // Import your LayoutRouter
-import GuardedRoute from './Components/Auth/routeguard';
 import EmailVerified from './Components/Auth/EmailComponent/EmailVerified';
+import GuardedRoute from './Components/Auth/routeguard';
 
 function AppContent() {
   const location = useLocation();
@@ -38,6 +38,7 @@ function AppContent() {
                 <GuardedRoute element={<LayoutRouter />} />
               }
             />
+
           </Route>
         </Routes>
       </div>
