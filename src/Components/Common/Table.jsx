@@ -37,20 +37,7 @@ export default function DynamicTable({ columns, rows, actions, rowsPerPage = 5 }
                     {cell}
                   </td>
                 ))}
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium font-poppins flex space-x-2">
-                  {/* Dynamically render action buttons */}
-                  {actions.map((action, actionIndex) => (
-                    <button
-                      key={actionIndex}
-                      onClick={() => action.handler(row, rowIndex)} // Handle dynamic action
-                      className={`flex items-center justify-center px-4 py-2 text-sm border border-gray-300 rounded-md hover:bg-gray-100 ${
-                        action.label === 'Delete' ? 'text-red-600' : 'text-blue-600'
-                      }`}
-                    >
-                      {action.label}
-                    </button>
-                  ))}
-                </td>
+
               </tr>
             ))}
           </tbody>
@@ -58,7 +45,7 @@ export default function DynamicTable({ columns, rows, actions, rowsPerPage = 5 }
       </div>
 
       {/* Pagination logic (if needed) */}
-    
+
     </div>
   );
 }
