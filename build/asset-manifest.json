@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.b8b4c5bb.css",
-    "main.js": "/static/js/main.3e853074.js",
-    "static/js/453.c93feafb.chunk.js": "/static/js/453.c93feafb.chunk.js",
-    "index.html": "/index.html",
-    "main.b8b4c5bb.css.map": "/static/css/main.b8b4c5bb.css.map",
-    "main.3e853074.js.map": "/static/js/main.3e853074.js.map",
-    "453.c93feafb.chunk.js.map": "/static/js/453.c93feafb.chunk.js.map"
+    "main.css": "/mapospace-frontend/static/css/main.9d16194f.css",
+    "main.js": "/mapospace-frontend/static/js/main.35f2b16e.js",
+    "static/js/453.c93feafb.chunk.js": "/mapospace-frontend/static/js/453.c93feafb.chunk.js",
+    "index.html": "/mapospace-frontend/index.html",
+    "main.9d16194f.css.map": "/mapospace-frontend/static/css/main.9d16194f.css.map",
+    "main.35f2b16e.js.map": "/mapospace-frontend/static/js/main.35f2b16e.js.map",
+    "453.c93feafb.chunk.js.map": "/mapospace-frontend/static/js/453.c93feafb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b8b4c5bb.css",
-    "static/js/main.3e853074.js"
+    "static/css/main.9d16194f.css",
+    "static/js/main.35f2b16e.js"
   ]
 }

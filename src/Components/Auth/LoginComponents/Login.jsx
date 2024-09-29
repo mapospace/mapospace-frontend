@@ -1,58 +1,100 @@
-import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { EyeSlashIcon } from "@heroicons/react/24/outline";
 import Snackbar from "../../Common/snackbar";
 import { useAuth } from "../auth";
-
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import logo from "../../../assets/logo.png";
 import { motion } from "framer-motion";
-import LoadingBar from 'react-top-loading-bar'
+import LoadingBar from 'react-top-loading-bar';
 import Button from "../../Common/Button";
+import Cookies from 'js-cookie';
+import { setCookie, getCookie, removeCookie } from '../../Utils/CookieHelper'
 
 export default function Login() {
   const [visible, setVisible] = useState(true);
-  const ref = useRef(null)
+  const ref = useRef(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [checked, setIsChecked] = useState(false);
+  const [checked, setIsChecked] = useState(false); // Remember Me checkbox
   const [snackbar, setSnackbar] = useState({
     isVisible: false,
     message: "",
     type: "",
   });
+
+  const { login } = useAuth(); // Access login function from AuthProvider
+  const navigate = useNavigate(); // Access navigate function from react-router-dom
+  const location = useLocation(); // Get current location
+
+  // Toggle password visibility
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
+
+  // Handle "Remember Me" checkbox change
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
   };
 
+  // Load email and password from cookies on component mount only when the login URL is hit
+  useEffect(() => {
+    if (location.pathname === "/mapospace-frontend/login") { // Trigger only when login URL is hit
+      const rememberedEmail = getCookie("rememberedEmail");
+      const rememberedPassword = getCookie("rememberedPassword");
 
+      if (rememberedEmail) {
+        setEmail(rememberedEmail);
+        setIsChecked(true); // Automatically check the "Remember Me" box if cookies are set
+      }
+      if (rememberedPassword) {
+        setPassword(rememberedPassword); // Pre-fill password field if saved
+      }
+    }
+  }, [location.pathname]);
+
+  // Save email and password to cookies if "Remember Me" is checked
+  const handleRememberMe = () => {
+    if (checked) {
+      setCookie("rememberedEmail", email); // Save email for 7 days by default
+      setCookie("rememberedPassword", password); // Save password for 7 days by default
+    } else {
+      removeCookie("rememberedEmail"); // Remove email if "Remember Me" is unchecked
+      removeCookie("rememberedPassword"); // Remove password if "Remember Me" is unchecked
+    }
+  };
+
+  // Handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
     if (ref.current) {
       ref.current.staticStart(); // Start the loading bar
     }
 
+
     if (email && password) {
       const formData = {
         businessEmail: email,
         password: password,
       };
-
-      Axios.post(`${process.env.REACT_APP_BASEURL}/user/login`, formData)
+      const baseUrl = process.env.REACT_APP_BASEURL || 'https://develop-dot-mapospacev1.el.r.appspot.com/api/v1';
+      Axios.post(`${baseUrl}/user/login`, formData)
         .then((response) => {
           const token = response.data.data.userLoginToken;
           const refreshToken = response.data.data.refreshToken;
-          console.log("Logged in Successfully!", token);
 
-          // Save the token and update authentication state
+          // Save token and refreshToken in sessionStorage
           sessionStorage.setItem('token', token);
           sessionStorage.setItem('refreshToken', refreshToken);
-          login(token); // Pass token to login function
+
+          // Save token and refreshToken in cookies
+          setCookie("token", token); // Save token in cookie
+          setCookie("refreshToken", refreshToken); // Save refresh token in cookie
+
+          // Call login function
+          login(token);
 
           setSnackbar({
             isVisible: true,
@@ -60,16 +102,20 @@ export default function Login() {
             type: "success",
           });
 
+          handleRememberMe(); // Call Remember Me function
+
           if (ref.current) {
             ref.current.complete(); // Complete the loading bar
           }
-          if (!response.data.data.ifVerified) {
-            navigate("/mapospace-frontend/verify-email", { state: { email } });
-          }
-          else if (response.data.data.tenantExists) {
-            navigate("/mapospace-frontend/dashboard");
-          } else {
-            navigate("/mapospace-frontend/onboard");
+          console.log("respoooooo", response)
+          if (response.data.data.ifVerified) {
+            if (!response.data.data.ifVerified) {
+              navigate("/mapospace-frontend/verify-email", { state: { email } });
+            } else if (response.data.data.tenantExists) {
+              navigate("/mapospace-frontend/dashboard");
+            } else {
+              navigate("/mapospace-frontend/onboard");
+            }
           }
         })
         .catch((error) => {
@@ -85,6 +131,7 @@ export default function Login() {
           });
         });
 
+
       setTimeout(() => {
         setVisible(false);
         setSnackbar({ isVisible: false, message: "", type: "" });
@@ -98,10 +145,6 @@ export default function Login() {
       });
     }
   };
-
-
-  const { login } = useAuth(); // Access login function from AuthProvider
-  const navigate = useNavigate(); // Access navigate function from react-router-dom
 
   const handleCloseSnackbar = () => {
     setSnackbar({ isVisible: false, message: "", type: "" });
@@ -241,6 +284,8 @@ export default function Login() {
     </div >
   );
 }
+
+
 
 function ChromeIcon(props) {
   return (

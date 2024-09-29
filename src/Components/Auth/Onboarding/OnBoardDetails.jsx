@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import Button from "../../Common/Button";
 import Snackbar from "../../Common/snackbar";
 import Icon from "../../Common/Icon";
 import api from "../../Common/interceptor"
+import Button from "../../Common/Button";
+import { useNavigate } from "react-router-dom";
 export default function OnBoardDetails() {
   const [compamyname, setcompamyname] = useState("");
   const [email, setemail] = useState("");
@@ -49,6 +50,8 @@ export default function OnBoardDetails() {
     "India",
 
   ];
+
+  const navigate = useNavigate()
 
   const validateCompanyName = (name) => {
     if (!name) return "Company name is required";
@@ -159,6 +162,7 @@ export default function OnBoardDetails() {
             message: "Form submitted successfully!",
             type: "success",
           });
+          navigate("/mapospace-frontend/dashboard")
           setErrors({});
         })
         .catch((error) => {

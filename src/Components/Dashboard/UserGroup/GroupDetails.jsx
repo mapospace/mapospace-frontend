@@ -50,8 +50,8 @@ const UserData = ({ title, value }) => {
             {title}
         </div>
 
-        {value.map((user) => (
-            <div>
+        {value.map((user, index) => (
+            <div key={index}>
                 <RowData title="ID:" value={user._id} border={false} />
                 <RowData title="Business Email:" value={user.businessEmail} border={false} />
                 <RowData title="Name:" value={user.firstName + " " + user.lastName} />

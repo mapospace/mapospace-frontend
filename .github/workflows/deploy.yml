@@ -16,13 +16,20 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16' # Use the Node.js version you need
+          node-version: '20' # Use the Node.js version you need
 
       - name: Install dependencies
         run: npm install
 
+      - name: Debug environment variables
+        run: |
+          echo "REACT_APP_BASEURL=${{ secrets.REACT_APP_BASEURL }}"
+
       - name: Build the React app
-        run: npm run build
+        env:
+          REACT_APP_BASEURL: ${{ secrets.REACT_APP_BASEURL }}
+        run: |
+          CI=false npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

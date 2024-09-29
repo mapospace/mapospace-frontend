@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import Snackbar from "../../Common/snackbar";
 import Axios from "axios";
 import Icon from "../../Common/Icon";
+
 export default function VerifyEmail() {
   const [timer, setTimer] = useState(180);
   const location = useLocation();
@@ -30,8 +31,8 @@ export default function VerifyEmail() {
       const formData = {
         businessEmail: email,
       };
-
-      Axios.post(`${process.env.REACT_APP_BASEURL}/user/resend-verification-mail`, formData)
+      const baseUrl = process.env.REACT_APP_BASEURL || 'https://develop-dot-mapospacev1.el.r.appspot.com/api/v1';
+      Axios.post(`${baseUrl}/user/resend-verification-mail`, formData)
         .then((response) => {
           const { message, success } = response.data;
           setTimer(180);

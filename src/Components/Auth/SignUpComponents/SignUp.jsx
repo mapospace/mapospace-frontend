@@ -25,7 +25,7 @@ export default function SignUp() {
     message: "",
     type: "",
   });
-  
+
   const navigate = useNavigate(); // Initialize useNavigate
 
   const handleTogglePassword = () => {
@@ -35,7 +35,7 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     ref.current.staticStart();
     event.preventDefault();
-    
+
     const newErrors = validateForm(
       fname,
       lname,
@@ -52,8 +52,8 @@ export default function SignUp() {
         password: password,
         passwordAgain: passwordAgain,
       };
-
-      axios.post(`${process.env.REACT_APP_BASEURL}/user/signup`, formData)
+      const baseUrl = process.env.REACT_APP_BASEURL || 'https://develop-dot-mapospacev1.el.r.appspot.com/api/v1';
+      axios.post(`${baseUrl}/user/signup`, formData)
         .then((response) => {
           console.log("Form submitted successfully!", response.data);
           setSnackbar({
@@ -65,7 +65,7 @@ export default function SignUp() {
 
           // Navigate to the VerifyEmail page with email in state
           navigate("/mapospace-frontend/verify-email", { state: { email } });
-          
+
         })
         .catch((error) => {
           console.error("Error submitting form:", error);
@@ -99,7 +99,7 @@ export default function SignUp() {
   };
 
   return (
-    <div className="flex items-center justify-center font-poppins mt-1">
+    <div className="flex h-full items-center justify-center font-poppins mt-1">
       {visible && <LoadingBar color='#7e22ce' height={5} ref={ref} />}
       <motion.div className="flex flex-col items-center justify-center px-6 pt-2 pb-4 border-1 border-t-2 bg-white shadow-xl rounded-md" style={{ width: '550px' }}
         initial={{ opacity: 0, scale: 0.5 }}
@@ -232,7 +232,7 @@ export default function SignUp() {
           <div className="flex justify-center items-center mt-1">
             <p className="text-sm text-gray-600">
               Already have an account?{" "}
-              <Link to="/" className="text-purple-700">
+              <Link to="/mapospace-frontend" className="text-purple-700 font-bold">
                 Login
               </Link>
             </p>

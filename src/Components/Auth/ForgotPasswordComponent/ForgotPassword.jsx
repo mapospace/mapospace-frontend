@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Button from "../../Common/Button";
 import Snackbar from "../../Common/snackbar";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Icon from "../../Common/Icon";
 import { motion } from "framer-motion";
+import Button from "../../Common/Button";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -37,10 +37,10 @@ export default function ForgotPassword() {
       const formData = {
         businessEmail: email,
       };
-
-      Axios.post(`${process.env.REACT_APP_BASEURL}/user/forget-password`, formData)
+      const baseUrl = process.env.REACT_APP_BASEURL || 'https://develop-dot-mapospacev1.el.r.appspot.com/api/v1';
+      Axios.post(`${baseUrl}/user/forget-password`, formData)
         .then((response) => {
-          const { message, success } = response.data;
+          const { success } = response.data;
           setSnackbar({
             isVisible: true,
             message: response.data.message || (success ? "Password reset email sent successfully!" : "Form submission failed."),
@@ -49,7 +49,7 @@ export default function ForgotPassword() {
 
           setErrors({});
           if (success) {
-            navigate("/verify-email", { state: { email } });
+            navigate("/mapospace-frontend/verify-email", { state: { email } });
           }
         })
         .catch((error) => {
