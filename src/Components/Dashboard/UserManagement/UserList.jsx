@@ -66,7 +66,6 @@ export default function UserList() {
     const newActiveStatus = !user.active;
     const originalStatus = user.active;
     
-   
     const updatedRows = [...rows];
     updatedRows[rowIndex].active = newActiveStatus;
     setRows(updatedRows);
@@ -173,6 +172,13 @@ export default function UserList() {
       onToggle={() => handleToggle(rowIndex)}
     />,
     row.email,
+    <button
+      key={row.id}
+      onClick={() => handleResetPassword(row, rowIndex)}
+      className="bg-transparent text-blue-600 border border-blue-600 rounded-lg px-4 py-2 hover:bg-blue-50 transition-colors"
+    >
+      Reset Password
+    </button>
   ]);
 
   const actions = [
@@ -204,7 +210,7 @@ export default function UserList() {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 relative">
       <LoadingBar color="#f11946" ref={loadingBarRef} />
       
       {showForm ? (
@@ -224,19 +230,6 @@ export default function UserList() {
         <span className="text-sm text-gray-600 font-poppins">
           Showing {(currentPage - 1) * rowsPerPage + 1} to {Math.min(currentPage * rowsPerPage, rows.length)} of {rows.length} users
         </span>
-        {/* <div className="flex items-center space-x-2">
-          <label htmlFor="rowsPerPage" className="text-sm text-gray-600 font-poppins">Rows per page:</label>
-          <select
-            id="rowsPerPage"
-            value={rowsPerPage}
-            onChange={handleRowsPerPageChange}
-            className="px-3 py-2 border rounded-lg text-gray-600 font-poppins"
-          >
-            <option value={3}>3</option>
-            <option value={5}>5</option>
-            <option value={10}>10</option>
-          </select>
-        </div> */}
         <div className="flex items-center space-x-2">
           <button
             onClick={goToPreviousPage}
